@@ -44,3 +44,4 @@ const Comment = model('Comment', commentSchema);
 module.exports = Comment;
 
 // 12.8 Tweak Models - done.
+// 13.1 Intro to this Chapter -- this chapter is for authentication system. etir jonyo je route lagbe tar kaj kora hoyeche routes folder er authRoute.js namok file e.

@@ -1,5 +1,19 @@
 const express = require('express');
 const app = express();
+const morgan = require('morgan');
+
+// setup views/template engine
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
+// middleware array
+const middleware = [
+  morgan('dev'),
+  express.static('public'),
+  express.urlencoded({extended: true}),
+  express.json()
+]
+app.use(middleware);
 
 app.get('/', (req,res) => {
   res.json({
