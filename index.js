@@ -16,15 +16,13 @@ const middleware = [
 app.use(middleware);
 
 app.get('/', (req,res) => {
-  res.json({
-    message: 'Hello World'
-  })
+  res.render('pages/auth/signup', {title: 'Create a new account'})
 })
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 5000
 
 app.listen(PORT, ()=> {
-  console.log(`Server running successfully on port: ${port}`);
+  console.log(`Server running successfully on port: ${PORT}`);
 })
 
 // 11.4 Create Project Structures
