@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 // import routes
 const authRoute = require('./routes/authRoute');
 
+// playground routes
+const validatorroute = require('./playground/validator'); // TODO: should be remove
+
 // setup views/template engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -20,6 +23,8 @@ const middleware = [
 app.use(middleware);
 
 app.use('/auth', authRoute);
+
+app.use('/playground', validatorroute) // TODO: should be remove
 
 app.get('/', (req,res) => {
   res.send(`<h2>Blogpost-App</h2>`)

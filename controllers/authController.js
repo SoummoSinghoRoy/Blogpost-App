@@ -78,3 +78,7 @@ exports.logoutController = (req,res,next) => {
 // 13.8 create log in page view -- login.ejs e kaj kora hoyeche.
 // 13.9 Login Controller -- ekhane log in succefully korte pare jeno ekjon user se kaj kora hoyeche.
 // 13.10 Conclusion
+// 14.1 what is validation?
+// 14.2 Validation Techniques
+// 14.3 Express Validator
+// 14.4 Create Playground for Validator -- etar kaj korechi playground folder er validator.js namok file e.
