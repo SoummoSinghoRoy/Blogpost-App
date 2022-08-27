@@ -14,10 +14,12 @@ router.post('/validator',
       .isEmpty()
       .withMessage(`username can't be empty`)
       .isLength({max: 15})
-      .withMessage(`username can't greater than 15`),
+      .withMessage(`username can't greater than 15`)
+      .trim(),
   check('email')
       .isEmail()
-      .withMessage(`provide a valid email`),
+      .withMessage(`provide a valid email`)
+      .normalizeEmail(),
   check('password')
       .custom(value => {
         if(value.length < 5){
@@ -37,6 +39,7 @@ router.post('/validator',
   let errors = validationResult(req);
   let formatter = (error) => error.msg
   console.log(errors.formatWith(formatter).mapped());
+  console.log(req.body.username, req.body.email);
   res.render('../views/playground/signup.ejs', {title: 'validator playground'});
 })
 
@@ -45,3 +48,6 @@ module.exports = router;
 // 14.5 Validation Check with Error Message
 // 14.6 Error Message with Formatter 
 // 14.7 Custom validation 
+// 14.8 sanitizer 
+/* amra learning purpose e playground diye kaj korchilam kintu ekhon ar drkr na thakai index.js theke remove kore niyechi */
+// 14.9 Signup Validator -- er jonyo kaj kora hoyeche routes directory'r authRoute.js e.
