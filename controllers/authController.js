@@ -1,14 +1,27 @@
 const bcrypt = require('bcrypt');
+const {validationResult} = require('express-validator');
+const errorFormatter = require('../utils/validationErrorFormatter');
 
 const User = require('../models/User');
 
 exports.signupGetController = (req,res,next) => {
-  res.render('../views/pages/auth/signup.ejs', {title: 'Create a new accont'})
+  res.render('../views/pages/auth/signup.ejs', {title: 'Create a new accont', error: {}, value: {}})
 }
 
 exports.signupPostController = async (req,res,next) => {
-  // let {username, email, password, confirmPassword} = req.body; validation er somoy confirm password lagbe. apatoto korchi na.
+
   let {username, email, password} = req.body;
+
+  let errors = validationResult(req).formatWith(errorFormatter)
+  if(!errors.isEmpty()) {
+    return res.render('../views/pages/auth/signup.ejs', { 
+      title: 'Create a new accont', 
+      error: errors.mapped(), 
+      value: {
+        username, email, password
+      }
+    })
+  }
 
   try {    
   let hashedPassword = await bcrypt.hash(password, 11)
@@ -82,3 +95,7 @@ exports.logoutController = (req,res,next) => {
 // 14.2 Validation Techniques
 // 14.3 Express Validator
 // 14.4 Create Playground for Validator -- etar kaj korechi playground folder er validator.js namok file e.
+
+// 14.11 Show Error Message to User -- er jonyo controller + signup.ejs file e kaj korechi
+// 14.12 Render Submitted Data Back -- er jonyo controller + signup.ejs file e kaj korechi kichu
+// 14.13 Separte Validator -- validator folder er modhye auth namok ekta folder korechi jar modhye signup, login er jonyo validation file thakbe ebong jar jar file e se onujayi validation code likhbo.
