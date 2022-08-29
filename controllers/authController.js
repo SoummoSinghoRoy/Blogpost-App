@@ -45,11 +45,21 @@ exports.signupPostController = async (req,res,next) => {
 }
 
 exports.loginGetController = (req,res,next) => {
-  res.render('../views/pages/auth/login.ejs', {title: 'Log in'})
+  res.render('../views/pages/auth/login.ejs', {title: 'Login to your account', error: {}, value: {}})
 }
 
 exports.loginPostController = async (req,res,next) => {
   let {email, password} = req.body
+
+  let errors = validationResult(req).formatWith(errorFormatter);
+  if(!errors.isEmpty()) {
+    return res.render('../views/pages/auth/login.ejs', 
+    {
+      title: 'Login to your account', 
+      error: errors.mapped(),
+      value: { email }
+    })
+  }
   try {
     let user = await User.findOne({email})
 

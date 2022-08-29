@@ -37,4 +37,4 @@ module.exports = [
       })
 ];
 
-// 14.14 Login Validator -- eta agamikalker task amar jonyyo. ami nije agee try korbo.
+// 14.14 Login Validator -- etar kaj korechi loginValidator.js er modhye.
