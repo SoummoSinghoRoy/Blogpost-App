@@ -28,3 +28,7 @@ module.exports = [
   body('password')
       .not().isEmpty().withMessage(`Password can't be empty`)
 ]
+
+// 15.1 How Authentication works
+// 15.2 What is Cookie
+// 15.3 Create and Using Cookie -- etar kaj korechi authcontroller.js e.

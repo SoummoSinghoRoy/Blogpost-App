@@ -44,20 +44,20 @@ exports.signupPostController = async (req,res,next) => {
   }
 }
 
-exports.loginGetController = (req,res,next) => {
+exports.loginGetController = (req,res,next) => { 
+  console.log(req.session.user, req.session.isloggedIn);
   res.render('../views/pages/auth/login.ejs', {title: 'Login to your account', error: {}, value: {}})
 }
 
 exports.loginPostController = async (req,res,next) => {
   let {email, password} = req.body
-
   let errors = validationResult(req).formatWith(errorFormatter);
   if(!errors.isEmpty()) {
     return res.render('../views/pages/auth/login.ejs', 
     {
       title: 'Login to your account', 
       error: errors.mapped(),
-      value: { email }
+      value: { email },
     })
   }
   try {
@@ -75,11 +75,9 @@ exports.loginPostController = async (req,res,next) => {
         message: `Password didn't Match`
       })
     }
-    console.log(
-      `successfully login by:
-      ${user}`
-    );
-      res.render('../views/pages/auth/login.ejs', {title: 'Log in'})
+    req.session.isloggedIn = true
+    req.session.user = user
+    res.render('../views/pages/auth/login.ejs', {title: 'Login to your account', error: {}, value: {}})
   } catch (error) {
     console.log(`Error occured: ${error}`);
     next(error)
@@ -109,3 +107,6 @@ exports.logoutController = (req,res,next) => {
 // 14.11 Show Error Message to User -- er jonyo controller + signup.ejs file e kaj korechi
 // 14.12 Render Submitted Data Back -- er jonyo controller + signup.ejs file e kaj korechi kichu
 // 14.13 Separte Validator -- validator folder er modhye auth namok ekta folder korechi jar modhye signup, login er jonyo validation file thakbe ebong jar jar file e se onujayi validation code likhbo.
+
+// 15.4 Config Cookies
+// 15.6 Create And Configure Session -- eta install korar por import & configure korechi index.js e  ar session niye kaj korechi authController.js e karon controller e sokol kaj kora hobe.
