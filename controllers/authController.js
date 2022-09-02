@@ -110,3 +110,6 @@ exports.logoutController = (req,res,next) => {
 
 // 15.4 Config Cookies
 // 15.6 Create And Configure Session -- eta install korar por import & configure korechi index.js e  ar session niye kaj korechi authController.js e karon controller e sokol kaj kora hobe.
+// 15.7 Connect Mlab Databse with Compass
+// 15.8 Session Store -- session store korar jonyo connect-mpngodb-session module use korechi ja import korechi & configuration korechi index.js e.
+// 15.9 Bind User with Request Middleware -- etar jonyo middleware folder e authMiddleware.js namok file create kore tar modhye sob kaj korechi.

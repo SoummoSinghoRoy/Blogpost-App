@@ -1,8 +1,16 @@
 const express = require('express');
 const app = express();
+const MongoDB_URI = 'mongodb://localhost:27017/blogpost-app'
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const store = new MongoDBStore({
+  uri: MongoDB_URI,
+  collection: 'sessions',
+  expires: 1000 * 60 * 60 * 2
+});
 
 // import routes
 const authRoute = require('./routes/authRoute');
@@ -10,6 +18,10 @@ const authRoute = require('./routes/authRoute');
 // setup views/template engine
 app.set('view engine', 'ejs');
 app.set('views', 'views');
+
+// import custom project middleware
+const { bindUserWithRequest } = require('./middleware/authMiddleware');
+const setLocals = require('./middleware/setLocals');
 
 // middleware array
 const middleware = [
@@ -21,7 +33,10 @@ const middleware = [
     secret: process.env.SECRET_KEY || 'keyboard cat',
     resave: false,
     saveUninitialized: false,
-  })
+    store: store,
+  }),
+  bindUserWithRequest(),
+  setLocals()
 ]
 app.use(middleware);
 
@@ -35,7 +50,7 @@ app.get('/', (req,res) => {
 
 const PORT = process.env.PORT || 5000
 
-mongoose.connect('mongodb://localhost:27017/blogpost-app')
+mongoose.connect(MongoDB_URI)
         .then(()=> {
           console.log(`Database connected!`);
           app.listen(PORT, ()=> {
