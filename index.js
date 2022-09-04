@@ -14,6 +14,7 @@ const store = new MongoDBStore({
 
 // import routes
 const authRoute = require('./routes/authRoute');
+const dashboardRoute = require('./routes/dashboardRoute');
 
 // setup views/template engine
 app.set('view engine', 'ejs');
@@ -41,7 +42,7 @@ const middleware = [
 app.use(middleware);
 
 app.use('/auth', authRoute);
-
+app.use('/dashboard', dashboardRoute);
 
 
 app.get('/', (req,res) => {
@@ -50,7 +51,9 @@ app.get('/', (req,res) => {
 
 const PORT = process.env.PORT || 5000
 
-mongoose.connect(MongoDB_URI)
+mongoose.connect(MongoDB_URI, {
+  useNewUrlParser: true
+})
         .then(()=> {
           console.log(`Database connected!`);
           app.listen(PORT, ()=> {
