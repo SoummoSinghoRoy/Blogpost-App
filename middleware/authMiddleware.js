@@ -34,7 +34,7 @@ exports.isUnAuthenticated = (req,res, next) => {
 
 // 15.10 SetLocals Middleware -- etar kaj korechi setLocalas.js namok file e
 // 15.12 IsAuthenticated Middleware -- ei middleware er modhyey isAuthentcated namok module e kaj kora hoyeche etar jonyo & jehetu ei module dara dashboard er route protect kora hoyeche tai as a middleware eta dashboardRoute.js e import kore use kora hoyeche. 
-// Logout -- etar jonyo kaj korechi navigation.ejs & authController.js er logoutController e.
+// 15.13 Logout -- etar jonyo kaj korechi navigation.ejs & authController.js er logoutController e.
 
 // task: jokhon kono user login obsthai thakbe tokhony dashboard page visible hobe with menu. but login na thakleo bortomane dashboard dekhte pache kintu take to dekhano jabe na dashboard page / menu. se sudhu login & signup tuku dekhte parbe. -- done
 
