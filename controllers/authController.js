@@ -77,7 +77,13 @@ exports.loginPostController = async (req,res,next) => {
     }
     req.session.isloggedIn = true
     req.session.user = user
-    res.render('../views/pages/auth/login.ejs', {title: 'Login to your account', error: {}, value: {}})
+    req.session.save(error => {
+      if(error) {
+        console.log(error);
+        return next(error)
+      }
+      res.redirect('/dashboard')
+    })
   } catch (error) {
     console.log(`Error occured: ${error}`);
     next(error)
@@ -85,7 +91,13 @@ exports.loginPostController = async (req,res,next) => {
 }
 
 exports.logoutController = (req,res,next) => {
-  
+  req.session.destroy(error => {
+    if(error) {
+      console.log(error);
+      return next(error)
+    }
+    return res.redirect('/auth/login')
+  })
 }
 
 // views er modhye pages folder e auth namok ekta folder theke authentication onujaiyi je response render hobe. tar template toiry kora hoyeche.
