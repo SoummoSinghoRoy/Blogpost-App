@@ -2,9 +2,12 @@
 
 const router = require('express').Router();
 const {check, validationResult} = require('express-validator');
+const flash = require('../utils/Flash');
 
 router.get('/validator', (req,res,next)=>{
-  res.render('../views/playground/signup.ejs', {title: 'validator playground'});
+  console.log(flash.getMessage(req));
+
+  res.render('../views/playground/signup', {title: 'validator playground'});
 })
 
 router.post('/validator', 
@@ -37,10 +40,12 @@ router.post('/validator',
 ],
 (req,res,next)=>{
   let errors = validationResult(req);
-  let formatter = (error) => error.msg
-  console.log(errors.formatWith(formatter).mapped());
-  console.log(req.body.username, req.body.email);
-  res.render('../views/playground/signup.ejs', {title: 'validator playground'});
+  if(!errors.isEmpty()) {
+    req.flash('fail', 'Something happend wrong!')
+  } else {
+    req.flash('success', 'User create succefully!')
+  }
+  res.redirect('/playground/validator')
 })
 
 module.exports = router;
@@ -51,3 +56,6 @@ module.exports = router;
 // 14.8 sanitizer 
 /* amra learning purpose e playground diye kaj korchilam kintu ekhon ar drkr na thakai index.js theke remove kore niyechi */
 // 14.9 Signup Validator -- er jonyo kaj kora hoyeche routes directory'r authRoute.js e.
+
+// purbey connect flash setup korechi & usage ta dekhechi.
+// 16.3 Create Flash Class -- etar jonyo utils directory te Flash.js namok class type module create korechi sekhane kaj korechi.

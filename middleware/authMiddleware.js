@@ -39,3 +39,6 @@ exports.isUnAuthenticated = (req,res, next) => {
 // task: jokhon kono user login obsthai thakbe tokhony dashboard page visible hobe with menu. but login na thakleo bortomane dashboard dekhte pache kintu take to dekhano jabe na dashboard page / menu. se sudhu login & signup tuku dekhte parbe. -- done
 
 // 15.14 Unauthenticated Middleware -- etar kaj kora hoyeche authMiddleware.js er modhye ekti module hisebe ebong import korechio authRoute e.
+
+// 16.1 Intro
+// 16.2 Setup Connect Flash -- eta install kore import korechi index.js e ebong middleware hisebe use korechi. ebong playground er modhye theke learning purpose e kaj korechi.

@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const flash = require('connect-flash');
 
 const store = new MongoDBStore({
   uri: MongoDB_URI,
@@ -15,6 +16,9 @@ const store = new MongoDBStore({
 // import routes
 const authRoute = require('./routes/authRoute');
 const dashboardRoute = require('./routes/dashboardRoute');
+
+// playground routes
+const validatorRoute = require('./playground/validator');
 
 // setup views/template engine
 app.set('view engine', 'ejs');
@@ -37,13 +41,14 @@ const middleware = [
     store: store,
   }),
   bindUserWithRequest(),
-  setLocals()
+  setLocals(),
+  flash()
 ]
 app.use(middleware);
 
 app.use('/auth', authRoute);
 app.use('/dashboard', dashboardRoute);
-
+app.use('/playground', validatorRoute);
 
 app.get('/', (req,res) => {
   res.send(`<h2>Blogpost-App</h2>`)
