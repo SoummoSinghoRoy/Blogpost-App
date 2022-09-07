@@ -11,7 +11,7 @@
             <div class="row">
               <div class="col">
                 <label for="email" class="form-label">Enter you email (use correct email)</label>
-                <input type="email" class="form-control <%= error.email ? 'is-invalid' : '' %>" name="email" id="email" value="<%= value.email ? value.email : '' %>">
+                <input type="email" class="form-control <%= error.email ? 'is-invalid' : '' %>" name="email" id="email">
                 <p class="validation-feedback">
                   <%= error.email && error.email %> 
                 </p>

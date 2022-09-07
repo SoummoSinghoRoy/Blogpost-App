@@ -59,3 +59,5 @@ module.exports = router;
 
 // purbey connect flash setup korechi & usage ta dekhechi.
 // 16.3 Create Flash Class -- etar jonyo utils directory te Flash.js namok class type module create korechi sekhane kaj korechi.
+// 16.4 Using Flash in Our Project -- etar jonyo kaj kora hoyeche views folder er partials folder er modhye alert.ejs naam e ekta file e, tarpor Flash.js class object ke controller er file e import korechi.
+//16.5 Test Flash Message 

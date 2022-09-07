@@ -18,7 +18,7 @@ const authRoute = require('./routes/authRoute');
 const dashboardRoute = require('./routes/dashboardRoute');
 
 // playground routes
-const validatorRoute = require('./playground/validator');
+// const validatorRoute = require('./playground/validator');
 
 // setup views/template engine
 app.set('view engine', 'ejs');
@@ -48,7 +48,7 @@ app.use(middleware);
 
 app.use('/auth', authRoute);
 app.use('/dashboard', dashboardRoute);
-app.use('/playground', validatorRoute);
+// app.use('/playground', validatorRoute);
 
 app.get('/', (req,res) => {
   res.send(`<h2>Blogpost-App</h2>`)

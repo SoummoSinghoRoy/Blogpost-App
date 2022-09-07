@@ -1,4 +1,4 @@
-// 16.3 Create Flash Class -- eta ke proyojon onujayi import korte hobe.
+// 16.3 Create Flash Class -- eta ke proyojon onujayi import korte hobe, apatoto eta import korechi playground er validator.js e.
 
 class Flash {
   constructor (req) {
