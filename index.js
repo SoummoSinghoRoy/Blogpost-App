@@ -1,17 +1,21 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
-const MongoDB_URI = 'mongodb://localhost:27017/blogpost-app'
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
+const config = require('config')
+
+console.log(config.get("name"));
 
 const store = new MongoDBStore({
-  uri: MongoDB_URI,
+  uri: config.get('db-uri'),
   collection: 'sessions',
   expires: 1000 * 60 * 60 * 2
 });
+
 
 // import routes
 const authRoute = require('./routes/authRoute');
@@ -28,14 +32,17 @@ app.set('views', 'views');
 const { bindUserWithRequest } = require('./middleware/authMiddleware');
 const setLocals = require('./middleware/setLocals');
 
+if(app.get('env') === 'development') {
+  app.use(morgan('dev'))
+}
+
 // middleware array
 const middleware = [
-  morgan('dev'),
   express.static('public'),
   express.urlencoded({extended: true}),
   express.json(),
   session({
-    secret: process.env.SECRET_KEY || 'keyboard cat',
+    secret: config.get('secret') || 'keyboard cat',
     resave: false,
     saveUninitialized: false,
     store: store,
@@ -56,7 +63,7 @@ app.get('/', (req,res) => {
 
 const PORT = process.env.PORT || 5000
 
-mongoose.connect(MongoDB_URI, {
+mongoose.connect(config.get('db-uri'), {
   useNewUrlParser: true
 })
         .then(()=> {

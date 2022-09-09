@@ -61,3 +61,10 @@ module.exports = router;
 // 16.3 Create Flash Class -- etar jonyo utils directory te Flash.js namok class type module create korechi sekhane kaj korechi.
 // 16.4 Using Flash in Our Project -- etar jonyo kaj kora hoyeche views folder er partials folder er modhye alert.ejs naam e ekta file e, tarpor Flash.js class object ke controller er file e import korechi.
 //16.5 Test Flash Message 
+// 16.6 Checking Environment -- project ki development naki production mode e ache tai check kora hocche index.js theke.
+// 16.7 Using Environment Variables
+// 16.8 Using Dotenv -- Dotenv module ta import kora hoyeche index.js e & .env namok ekta file create kora hoyeche jeta configure hobe dotenv'r sathe.
+// 16.9 Setup Configuration File -- er jonyo config folder er modhye config.js namok file e sokol kaj kora hoyeche.
+
+// 16.10 Using Config Module -- etar kaj korechi config folder er default.json namok file e, ekhane sokol prokar default configuration thakbe & import korechi index.js e. opor dike development & production environment er jonyo production.json & development.json file create korechi ebong development environment er jonyo development base configuration ar production er jonyo production base configuration kora hobe.
+// 16.11 Custom Environment Variables -- etar kaj korechi custom-environment-variables.json file e.
