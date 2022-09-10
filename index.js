@@ -6,7 +6,14 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const flash = require('connect-flash');
-const config = require('config')
+const config = require('config');
+const testConsole = require('debug')('app:test');
+const dbConsole = require('debug')('app:db');
+const chalk = require('chalk')
+
+testConsole('This is test console')
+dbConsole('This is db console')
+
 
 console.log(config.get("name"));
 
@@ -67,9 +74,9 @@ mongoose.connect(config.get('db-uri'), {
   useNewUrlParser: true
 })
         .then(()=> {
-          console.log(`Database connected!`);
+          console.log(chalk.green(`Database connected!`));
           app.listen(PORT, ()=> {
-            console.log(`Server running successfully on port: ${PORT}`);
+            console.log(chalk.greenBright(`Server running successfully on port: ${PORT}`));
           })
         })
         .catch(error => {
