@@ -9,3 +9,6 @@
 // 17.4 Debuggin and Error Handling Action -- when we handle error after debugging we must use try..catch block, also use try..catch block when we define async await. if we'll do asynchronous task then use then() & catch() method for handle error.
 // 17.5 Debug Module -- for debugging purpose. eta install kora hoyeche & index.js e require korechi.
 // 17.6 Chalk Module -- terminal syntax color setup purpose. eta install kora hoyeche & index.js e require korechi
+// 17.7 Node Debugger
+// 17.8 Chrome Debug Tolls
+// 17.9 Separate Route and Middleware File -- routes er jonyo routes folder er modhye routes.js namok file e route gulo rekhechi & sokol kaj okhane korechi & midllewares er jonyo middlewares folder er modhye middlewares.js namok file e middleware gulo rekhechi & sokol kaj okhane korechi.
