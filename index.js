@@ -17,6 +17,20 @@ setMiddlewares(app)
 // using route from route directory
 setRoutes(app)
 
+app.use((req,res,next) => {
+  let error = new Error('404 page not found')
+  error.status = 404
+  next(error)
+})
+
+app.use((error, req, res, next) => {
+  if(error.status === 404) {
+    return res.render('pages/error/404.ejs', { flashMessage: {} })
+  }
+  console.log(chalk.red.inverse(error.message));
+  console.log(error);
+  return res.render('pages/error/500.ejs', { flashMessage: {} })
+})
 
 const PORT = process.env.PORT || 5000
 

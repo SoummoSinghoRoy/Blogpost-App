@@ -44,7 +44,6 @@ exports.signupPostController = async (req,res,next) => {
     req.flash('success', 'User created succefully!')
     res.redirect('/auth/login')
   } catch (error) {
-    console.log(`Error occured: ${error}`);
     next(error)
   }
 }
@@ -99,14 +98,12 @@ exports.loginPostController = async (req,res,next) => {
     req.session.user = user
     req.session.save(error => {
       if(error) {
-        console.log(error);
         return next(error)
       }
       req.flash('success', 'Successfully logged in')
       res.redirect('/dashboard')
     })
   } catch (error) {
-    console.log(`Error occured: ${error}`);
     next(error)
   }
 }
@@ -114,7 +111,6 @@ exports.loginPostController = async (req,res,next) => {
 exports.logoutController = (req,res,next) => {
   req.session.destroy(error => {
     if(error) {
-      console.log(error);
       return next(error)
     }
     req.flash('success', 'Sucessfully logged out')
