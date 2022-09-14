@@ -1,51 +1,17 @@
 // 14.4 Create Playground for Validator -- valdation kaj korar jonyo je page gulo drkr tar jonyo views er modhye alada playground namok ar ekta folder rekhechi. jodi real project e evabe hobe na. sekhar jonyo evabe korchi.
 
 const router = require('express').Router();
-const {check, validationResult} = require('express-validator');
-const flash = require('../utils/Flash');
+const upload = require('../middleware/uploadMiddleware');
 
-router.get('/validator', (req,res,next)=>{
-  console.log(flash.getMessage(req));
-
-  res.render('../views/playground/signup', {title: 'validator playground'});
+router.get('/play', (req,res,next) => {
+  res.render('playground/play.ejs', {title: 'playground', flashMessage: {}});
 })
 
-router.post('/validator', 
-[
-  check('username')
-      .not()
-      .isEmpty()
-      .withMessage(`username can't be empty`)
-      .isLength({max: 15})
-      .withMessage(`username can't greater than 15`)
-      .trim(),
-  check('email')
-      .isEmail()
-      .withMessage(`provide a valid email`)
-      .normalizeEmail(),
-  check('password')
-      .custom(value => {
-        if(value.length < 5){
-          throw new Error(`password length must be greater than 5`)
-        }
-        return true
-      }),
-  check('confirmPassword')
-      .custom((value, {req}) =>{
-        if(value !== req.body.password) {
-          throw new Error(`password doesn't match`)
-        }
-        return true
-      })
-],
-(req,res,next)=>{
-  let errors = validationResult(req);
-  if(!errors.isEmpty()) {
-    req.flash('fail', 'Something happend wrong!')
-  } else {
-    req.flash('success', 'User create succefully!')
+router.post('/play', upload.single('my-file'), (req,res,next) => {
+  if(req.file) {
+    console.log(req.file);
   }
-  res.redirect('/playground/validator')
+  res.redirect('/playground/play')
 })
 
 module.exports = router;
@@ -68,3 +34,8 @@ module.exports = router;
 
 // 16.10 Using Config Module -- etar kaj korechi config folder er default.json namok file e, ekhane sokol prokar default configuration thakbe & import korechi index.js e. opor dike development & production environment er jonyo production.json & development.json file create korechi ebong development environment er jonyo development base configuration ar production er jonyo production base configuration kora hobe.
 // 16.11 Custom Environment Variables -- etar kaj korechi custom-environment-variables.json file e.
+
+// 18.3 Setup Playground -- ekhane multer related kichu kaj korechi sathe routes.js + playy.ejs e kaj korechi multer shekhar jonyo.
+// 18.4 Setup Storage -- multer install korechi & uploadMiddleware.js namok file e eta configure korechi.
+
+// 

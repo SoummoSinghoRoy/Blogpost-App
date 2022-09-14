@@ -41,4 +41,6 @@ module.exports = app => {
 // 17.10 404 Not Found -- etar kaj korechi views folder er pages folder modhye e error namok folder er 404.ejs file e & index.js.
 // 17.11 500 Internal Server Error -- etar kaj korechi views folder er pages folder modhye e error namok folder er 500.ejs file e & index.js.
 
-// 
+// 18.1 intro
+// 18.2 What is Multer -- multipart form data dealing middleware base function.
+// 18.3 Setup Playground -- etar jonyo kaj korechi playground folder er play.js e & views er playground er play.ejs e.
