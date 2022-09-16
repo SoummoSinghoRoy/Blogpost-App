@@ -113,7 +113,6 @@ exports.logoutController = (req,res,next) => {
     if(error) {
       return next(error)
     }
-    req.flash('success', 'Sucessfully logged out')
     return res.redirect('/auth/login')
   })
 }

@@ -1,0 +1,140 @@
+<%- include('../../partials/header.ejs')  %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3"></div>
+
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="card">
+              <div class="card-body">
+                <h4> <%= title %>  </h4>
+                <div class="profile-pics">
+                  <img 
+                    src=" <%= user.profilePics %> " 
+                    alt="profile-pic"
+                    class="img-thumbnail img-fluid"
+                    id="profilePics"
+                  >
+                  <form action="/uploads/profilePics" class="my-2" id="profilePicsForm">
+                    <input type="file" name="profilePics" id="profilePicsFile" accept="images/*">
+                    <input 
+                      type="button" 
+                      value="Remove pic"
+                      style="display: <%= user.profilePics.includes('default.png') ? 'none' : 'block' %>" 
+                      class="btn btn-danger btn-sm my-2" 
+                      id="removeProfilePics" 
+                    >
+                  </form>
+                </div>
+                <div>
+                  <form action="/dashboard/create-profile" method="post">
+                    <div class="form-group py-2">
+                      <label for="name">Enter Your Name</label>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        placeholder="enter your name"
+                        name="name"
+                        id="name"
+                      >
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Enter Your Email</label>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        placeholder="enter your email"
+                        name="email"
+                        id="email"
+                        value="<%= user.email %> "
+                        disabled
+                      >
+                    </div>
+                    <div class="form-group py-2">
+                      <label for="title">Enter Your Title</label>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        placeholder="enter your title"
+                        name="title"
+                        id="title"
+                      >
+                    </div>
+                    <div class="form-group">
+                      <label for="bio">Enter Your Bio</label>
+                      <textarea 
+                        name="bio" 
+                        id="bio" 
+                        cols="30" 
+                        rows="5"
+                        class="form-control"
+                      >
+                      </textarea>
+                    </div>
+                    <div class="py-2">
+                      <p class="lead">Your Social Link</p>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"> 
+                          <i class="fa-solid fa-globe"></i> 
+                        </span>
+                        <input 
+                          type="text"
+                          class="form-control"
+                          placeholder="website link"
+                          name="website"
+                          id="website"
+                        >
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"> 
+                          <i class="fa-brands fa-facebook"></i> 
+                        </span>
+                        <input 
+                          type="text"
+                          class="form-control"
+                          placeholder="website link"
+                          name="website"
+                          id="website"
+                        >
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <input 
+                          type="text"
+                          class="form-control"
+                          placeholder="twitter link"
+                          name="twitter"
+                          id="twitter"
+                        >
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <i class="fa-brands fa-github"></i>
+                        </span>
+                        <input 
+                          type="text"
+                          class="form-control"
+                          placeholder="github link"
+                          name="github"
+                          id="github"
+                        >
+                      </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="create profile">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include('../../partials/footer.ejs')  %>
+</body>
+</html> 
