@@ -1,5 +1,7 @@
 <%- include('../../partials/header.ejs')  %>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"/>
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-3"></div>
@@ -7,43 +9,27 @@
       <div class="col-md-9">
         <div class="row">
           <div class="col-md-8 offset-md-2">
-            
             <div class="card">
               <div class="card-body">
                 <h4> <%= title %>  </h4>
-                <h2 id="info"></h2>
-                <div class="row">
-                  <div class="profile-pics col-4">
-                    <img 
-                      src=" <%= user.profilePics %> " 
-                      alt="profile-pic"
-                      class="img-thumbnail img-fluid"
-                      id="profilePicsPreview"
+                <div class="profile-pics">
+                  <img 
+                    src=" <%= user.profilePics %> " 
+                    alt="profile-pic"
+                    class="img-thumbnail img-fluid"
+                    id="profilePics"
+                  >
+                  <form action="/uploads/profilePics" class="my-2" id="profilePicsForm">
+                    <input type="file" name="profilePicsFile" id="profilePicsFile" accept="images/*">
+                    <input 
+                      type="button" 
+                      value="Remove pic"
+                      style="display: <%= user.profilePics.includes('default.png') ? 'none' : 'block' %>" 
+                      class="btn btn-danger btn-sm my-2" 
+                      id="removeProfilePics" 
                     >
-                  </div>
-                  <div class="col-8">
-                    <div class="card">
-                      <div class="card-header">
-                        <h5>Instructions</h5>
-                      </div>
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item border-white">Image Dimension: </li>
-                        <li class="list-group-item border-white">width: 200px & height: 200px</li>
-                        <li class="list-group-item border-white">Image Size: less then 2Mb</li>
-                        <li class="list-group-item border-white" id="alertBox"></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="col-12">
-                    <form action="/uploads/profilePics" class="my-2" id="profilePicsForm">
-                      <div class="input-group mb-3">
-                        <label class="input-group-text" for="profilePicsFile">Upload</label>
-                        <input type="file" class="form-control" name="profilePicsFile" id="profilePicsFile" accept="images/*">
-                      </div>
-                    </form>
-                  </div>
+                  </form>
                 </div>
-                
                 <div>
                   <form action="/dashboard/create-profile" method="post">
                     <div class="form-group py-2">
@@ -148,12 +134,52 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="crop-modal" aria-labelledby="crop-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="crop-modalLabel">Resize Your Image</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="cropped-img"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancel-cropping">Cancel</button>
+              <button type="button" class="btn btn-primary" id="upload-img">Upload</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="modal fade" id="crop-modal" aria-labelledby="crop-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="crop-modalLabel">Resize Your Image</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="cropped-img"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-cropping">Cancel</button>
+              <button type="button" class="btn btn-primary" id="upload-img">Upload</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
   </div>
 
 <%- include('../../partials/footer.ejs')  %>
 
 
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
 <script src="/scripts/profilePicsUpload.js"></script>
 
 </body>
