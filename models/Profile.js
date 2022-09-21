@@ -22,11 +22,15 @@ const profileSchema = new Schema({
     trim: true,
     maxlength: 100
   },
-  profilePic : String,
+  profilePics: {
+    type: String,
+    default: '/uploads/default.png'
+  },
   links: {
     website: String,
     facebook: String,
     twitter: String,
+    userGithub: String
   },
   posts: [
     {

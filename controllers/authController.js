@@ -16,7 +16,6 @@ exports.signupGetController = (req,res,next) => {
 }
 
 exports.signupPostController = async (req,res,next) => {
-
   let {username, email, password} = req.body;
 
   let errors = validationResult(req).formatWith(errorFormatter)

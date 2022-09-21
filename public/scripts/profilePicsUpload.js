@@ -25,14 +25,13 @@ profilePicsFile.addEventListener('change', function () {
       let image = new Image();
       image.src = event.target.result
       image.onload = function () {
-        const anotherThis = profilePicsFile
-        const uploadedFileSize = anotherThis.files[0].size / 1024
+        const uploadedFileSize = profilePicsFile.files[0].size / 1024
         const maxFileSize = 1024 * 2
         let height = this.height;
         let width = this.width;
         let _this = reader
         if (height > 200 || width > 200 || uploadedFileSize > maxFileSize) {
-          alertBox.innerHTML = `uploader image must be less then 200px * 200px & size must be less then 2mb`
+          alertBox.innerHTML = `uploaded image must be less then 200px * 200px & size must be less then 2mb`
           alertBox.style.cssText = ` 
           color: red;
           font-weight: bold;`
@@ -50,3 +49,6 @@ profilePicsFile.addEventListener('change', function () {
     reader.readAsDataURL(uploadedFile)
   }
 })
+
+// 19.4 Setup Croppie JS -- eta korini tar bodole uploaded img er dimension & size niye validation korechi.
+// 19.5 Upload Profile Pics -- etar video lecture ta dekhechi but ami kaj profile pic upload er kaj ta onyovabe korechi. ami korechi muloto jokhon ekjon user profile create er jonyo data dibe tar sathey pic ta store hobe db te. etar kaj korechi dashboardController.js er createProfilePostController er modhye.

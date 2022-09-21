@@ -34,19 +34,23 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="col-12">
+                  <!-- <div class="col-12">
                     <form action="/uploads/profilePics" class="my-2" id="profilePicsForm">
                       <div class="input-group mb-3">
                         <label class="input-group-text" for="profilePicsFile">Upload</label>
                         <input type="file" class="form-control" name="profilePicsFile" id="profilePicsFile" accept="images/*">
                       </div>
                     </form>
-                  </div>
+                  </div> -->
                 </div>
                 
                 <div>
-                  <form action="/dashboard/create-profile" method="post">
+                  <form action="/dashboard/create-profile" method="post" enctype="multipart/form-data">
                     <div class="form-group py-2">
+                      <div class="input-group mb-3">
+                        <label class="input-group-text" for="profilePicsFile">Upload</label>
+                        <input type="file" class="form-control" name="profilePicsFile" id="profilePicsFile" accept="images/*">
+                      </div>
                       <label for="name">Enter Your Name</label>
                       <input 
                         type="text"
@@ -110,9 +114,9 @@
                         <input 
                           type="text"
                           class="form-control"
-                          placeholder="website link"
-                          name="website"
-                          id="website"
+                          placeholder="facebook link"
+                          name="facebook"
+                          id="facebook"
                         >
                       </div>
                       <div class="input-group mb-3">
@@ -135,8 +139,8 @@
                           type="text"
                           class="form-control"
                           placeholder="github link"
-                          name="github"
-                          id="github"
+                          name="userGithub"
+                          id="userGithub"
                         >
                       </div>
                     </div>

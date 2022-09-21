@@ -123,5 +123,3 @@ window.onload = function () {
 
 
 // 19.4 Setup Croppie JS
-
-// note: apatoto testing purpose e bootstrap 4 diyechi.
