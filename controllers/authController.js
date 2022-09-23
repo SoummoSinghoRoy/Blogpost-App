@@ -22,7 +22,7 @@ exports.signupPostController = async (req,res,next) => {
   if(!errors.isEmpty()) {
     req.flash('fail', 'Something wrong! check your form')
     return res.render('../views/pages/auth/signup.ejs', { 
-      title: 'Create a new accont', 
+      title: 'Create a new account', 
       error: errors.mapped(), 
       value: {
         username, email, password
@@ -74,7 +74,7 @@ exports.loginPostController = async (req,res,next) => {
     let user = await User.findOne({email})
 
     if(!user) {
-      req.flash('fail', 'Provide your valid username')
+      req.flash('fail', 'Provide your valid email')
       return res.render('../views/pages/auth/login.ejs', 
       {
         title: 'Login to your account', 
@@ -100,6 +100,7 @@ exports.loginPostController = async (req,res,next) => {
         return next(error)
       }
       req.flash('success', 'Successfully logged in')
+
       res.redirect('/dashboard')
     })
   } catch (error) {
