@@ -26,7 +26,8 @@ const profileSchema = new Schema({
   },
   profilePics: {
     type: String,
-    default: '/uploads/default.png'
+    default: '/uploads/default.png',
+    required: true
   },
   links: {
     website: String,

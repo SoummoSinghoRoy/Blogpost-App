@@ -34,14 +34,6 @@
                       </ul>
                     </div>
                   </div>
-                  <!-- <div class="col-12">
-                    <form action="/uploads/profilePics" class="my-2" id="profilePicsForm">
-                      <div class="input-group mb-3">
-                        <label class="input-group-text" for="profilePicsFile">Upload</label>
-                        <input type="file" class="form-control" name="profilePicsFile" id="profilePicsFile" accept="images/*">
-                      </div>
-                    </form>
-                  </div> -->
                 </div>
                 
                 <div>
@@ -60,7 +52,7 @@
                       <label for="name">Enter Your Name</label>
                       <input 
                         type="text"
-                        class="form-control <%= error.name ? 'is-invalid' : '' %> "
+                        class="form-control <%= error.name ? 'is-invalid' : '' %>"
                         placeholder="enter your name"
                         name="name"
                         id="name"
@@ -102,8 +94,7 @@
                         cols="30" 
                         rows="5"
                         class="form-control <%= error.bio ? 'is-invalid' : '' %>"    
-                      >
-                      </textarea>
+                      ></textarea>
                       <p class="validation-feedback text-danger">
                         <%= error.bio %> 
                       </p>

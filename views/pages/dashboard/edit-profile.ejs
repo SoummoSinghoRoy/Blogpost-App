@@ -1,13 +1,174 @@
 <%- include('../../partials/header.ejs')  %>
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-        <h2 class="text-center display-3">Edit Your Profile</h2>
+      <div class="col-md-3"></div>
+
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            
+            <div class="card">
+              <div class="card-body">
+                <h4> <%= title %>  </h4>
+                <h2 id="info"></h2>
+                <div class="row">
+                  <div class="profile-pics col-4">
+                    <img 
+                      src=" <%= user.profilePics %> " 
+                      alt="profile-pic"
+                      class="img-thumbnail img-fluid"
+                      id="profilePicsPreview"
+                    >
+                  </div>
+                  <div class="col-8">
+                    <div class="card">
+                      <div class="card-header">
+                        <h5>Instructions</h5>
+                      </div>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item border-white">Image Dimension: </li>
+                        <li class="list-group-item border-white">width: 200px & height: 200px</li>
+                        <li class="list-group-item border-white">Image Size: less then 2Mb</li>
+                        <li class="list-group-item border-white" id="alertBox"></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <form action="/dashboard/edit-profile" method="post">
+                    <div class="form-group py-2">
+                      <div class="input-group mb-3">
+                        <label class="input-group-text" for="profilePicsFile">Upload</label>
+                        <input 
+                          type="file" 
+                          class="form-control" 
+                          name="profilePicsFile" 
+                          id="profilePicsFile" 
+                          accept="images/*"
+                          disabled 
+                        >
+                      </div>
+                      <label for="name">Enter Your Name</label>
+                      <input 
+                        type="text"
+                        class="form-control <%= error.name ? 'is-invalid' : '' %>"
+                        placeholder="enter your name"
+                        value="<%= profile.name %>"
+                        name="name"
+                        id="name"
+                      >
+                      <p class="validation-feedback text-danger">
+                        <%= error.name %> 
+                      </p>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Enter Your Email</label>
+                      <input 
+                        type="text"
+                        class="form-control"
+                        placeholder="enter your email"
+                        name="email"
+                        id="email"
+                        value="<%= user.email %>"
+                        disabled
+                      >
+                    </div>
+                    <div class="form-group py-2">
+                      <label for="title">Enter Your Title</label>
+                      <input 
+                        type="text"
+                        class="form-control <%= error.title ? 'is-invalid' : '' %>"
+                        placeholder="enter your title"
+                        value="<%= profile.title %>"
+                        name="title"
+                        id="title"
+                      >
+                      <p class="validation-feedback text-danger">
+                        <%= error.title %> 
+                      </p>
+                    </div>
+                    <div class="form-group">
+                      <label for="bio">Enter Your Bio</label>
+                      <textarea 
+                        name="bio" 
+                        id="bio" 
+                        cols="30" 
+                        rows="5"
+                        class="form-control <%= error.bio ? 'is-invalid' : '' %>"    
+                      ><%= profile.bio %></textarea>
+                      <p class="validation-feedback text-danger">
+                        <%= error.bio %> 
+                      </p>
+                    </div>
+                    <div class="py-2">
+                      <p class="lead">Your Social Link</p>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"> 
+                          <i class="fa-solid fa-globe"></i> 
+                        </span>
+                        <input 
+                          type="url"
+                          class="form-control"
+                          placeholder="website link"
+                          value="<%= profile.links.website %>"
+                          name="website"
+                          id="website"
+                        >
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"> 
+                          <i class="fa-brands fa-facebook"></i> 
+                        </span>
+                        <input 
+                          type="url"
+                          class="form-control"
+                          placeholder="facebook link"
+                          value="<%= profile.links.facebook %>"
+                          name="facebook"
+                          id="facebook"
+                        >
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <i class="fa-brands fa-twitter"></i>
+                        </span>
+                        <input 
+                          type="url"
+                          class="form-control"
+                          placeholder="twitter link"
+                          value="<%= profile.links.twitter %>"
+                          name="twitter"
+                          id="twitter"
+                        >
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">
+                          <i class="fa-brands fa-github"></i>
+                        </span>
+                        <input 
+                          type="url"
+                          class="form-control"
+                          placeholder="github link"
+                          value="<%= profile.links.userGithub %> "
+                          name="userGithub"
+                          id="userGithub"
+                        >
+                      </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="update profile">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
 <%- include('../../partials/footer.ejs')  %>
+
 </body>
 </html> 

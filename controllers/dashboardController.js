@@ -42,7 +42,6 @@ exports.createProfileGetController = async (req, res, next) => {
 
 exports.createProfilePostController = async (req, res, next) => {
 
-  let { name, title, bio, website, facebook, twitter, userGithub  } = req.body
   let errors = validationResult(req).formatWith(errorFormatter)
   
   if(!errors.isEmpty()) {
@@ -54,6 +53,8 @@ exports.createProfilePostController = async (req, res, next) => {
     })
     
   }
+
+  let { name, title, bio, website, facebook, twitter, userGithub  } = req.body
 
   try {
 
@@ -80,14 +81,14 @@ exports.createProfilePostController = async (req, res, next) => {
       let createdProfile = await profile.save()
       await User.findOneAndUpdate(
         { _id: req.user._id },
-        {$set: {profile: createdProfile._id} }
+        {$set: { profile: createdProfile._id } }
       )
       req.flash('success', 'profile created successfully')
       res.redirect('/dashboard')
     }
     await User.findOneAndUpdate(
       { _id: req.user._id },
-      {$set: {profilePics: userProfilePics} }
+      {$set: { profilePics: userProfilePics } }
     )
     
     res.render('../views/pages/dashboard/create-profile', { 
@@ -101,12 +102,83 @@ exports.createProfilePostController = async (req, res, next) => {
   }
 }
 
-exports.editProfileGetController = (req, res, next) => {
-  next()
+exports.editProfileGetController = async (req, res, next) => {
+  try {
+    
+    let profile = await Profile.findOne({user: req.user._id})
+
+    if(!profile) {
+      return res.redirect('../views/pages/dashboard/create-profile.ejs')
+    }
+
+    res.render('../views/pages/dashboard/edit-profile.ejs', {
+      title: 'edit profile', 
+      profile,
+      flashMessage: flash.getMessage(req),
+      error: {} 
+    })
+
+  } catch (error) {
+    next(error)
+  }
 }
 
-exports.editProfilePostController = (req, res, next) => {
-  next()
+exports.editProfilePostController = async (req, res, next) => {
+
+  let { name, title, bio, website, facebook, twitter, userGithub  } = req.body
+
+  let errors = validationResult(req).formatWith(errorFormatter)
+
+
+  if(!errors.isEmpty()) {
+
+    return res.render('../views/pages/dashboard/edit-profile', { 
+      title: 'edit profile', 
+      error: errors.mapped(), 
+      flashMessage: flash.getMessage(req),
+      profile: {
+        name, title, bio, 
+        links: {
+          website,
+          facebook,
+          twitter,
+          userGithub
+        },
+      }
+    })
+  }
+
+  try {
+    
+    let profile = {
+      name,
+      title,
+      bio,
+      links: {
+        website: website || '',
+        facebook: facebook || '',
+        twitter: twitter || '',
+        userGithub: userGithub || ''
+      }
+    }
+
+    let updatedProfile = await Profile.findOneAndUpdate(
+      { user: req.user._id },
+      { $set: profile },
+      { new: true }
+    )
+
+    req.flash('success', 'profile updated successfully')
+    res.render('../views/pages/dashboard/edit-profile.ejs', {
+      title: 'edit profile', 
+      flashMessage: flash.getMessage(req),
+      error: {},
+      profile: updatedProfile 
+    })
+
+  } catch (error) {
+    next(error)
+  }
 }
 
 // 15.12 IsAuthenticated Middleware -- etar kaj kora hoyeche authMiddleware er modhye.
@@ -120,4 +192,6 @@ exports.editProfilePostController = (req, res, next) => {
 // 19.6 Remove Profile Pics -- ei video theke jante parbo kivabe db model theke file data remove houyar sathe sathe upload directiory theke file ta delete kora jai.
 // 19.7 Validate Profile -- ekhane create profile er form validation kora hoyeche. etar jonyo kaj korechi validator folder er modhye dashboard folder er profileValidator.js file e.
 
-// 19.9 Save Profile Data -- 
+// 19.9 Save Profile Data -- ekhane mouloto profile pic + data eksathe save kora hocche createProfilePostController theke. kintu lecture e ektu vinno vabe kaj kora. 
+// 19.10 Edit Profile Template -- etar kaj korechi edit-profile.ejs, editProfileGetController & etar route er modhye.
+// 19.12 Bug Fixing -- ei lecture ta jodio ami jevabe profile niye kaj korechi tar sathe somprikto na tobuo porobortite emon kono kaj korle kaje lagbe.
