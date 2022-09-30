@@ -12,7 +12,6 @@ const  {
  }  = require('../controllers/dashboardController');
 const { isAuthenticated } = require('../middleware/authMiddleware');
 const profileValidator = require('../validator/dashboard/profileValidator');
-const upload = require('../middleware/uploadMiddleware');
 
 router.get('/', isAuthenticated, dashboardGetController);
 
@@ -20,7 +19,6 @@ router.get('/create-profile', isAuthenticated, createProfileGetController);
 router.post('/create-profile', 
             isAuthenticated,
             profileValidator,
-            upload.single('profilePicsFile'),  
             createProfilePostController);
 
 router.get('/edit-profile', isAuthenticated, editProfileGetController);

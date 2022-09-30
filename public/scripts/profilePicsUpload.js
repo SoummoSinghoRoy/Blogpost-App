@@ -1,20 +1,6 @@
-/*let profilePicsFile = document.getElementById('profilePicsFile');
-
-let picPreview = document.getElementById('profilePicsPreview');
-
-profilePicsFile.addEventListener('change', function () {
-  const uploadFile = this.files[0]
-  if(uploadFile) {
-    let reader = new FileReader();
-    reader.addEventListener('load', function () {
-      picPreview.setAttribute("src", this.result)
-    })
-    reader.readAsDataURL(uploadFile)
-  }
-})*/
-
 let profilePicsFile = document.getElementById('profilePicsFile');
-let picPreview = document.getElementById('profilePicsPreview');
+let uploadedPic = document.getElementById('uploadedPic');
+let confirmUploading = document.getElementById('confirmUploading');
 let alertBox = document.getElementById('alertBox');
 
 profilePicsFile.addEventListener('change', function () {
@@ -33,15 +19,18 @@ profilePicsFile.addEventListener('change', function () {
         if (height > 200 || width > 200 || uploadedFileSize > maxFileSize) {
           alertBox.innerHTML = `uploaded image must be less then 200px * 200px & size must be less then 2mb`
           alertBox.style.cssText = ` 
-          color: red;
+          color: #842029;
+          background-color: #f8d7da;
           font-weight: bold;`
+          profilePicsFile.value = ''
           return false
         } else {
-          picPreview.setAttribute("src", _this.result)
-          alertBox.innerHTML = `Attached Successfully`
+          uploadedPic.setAttribute("src", _this.result)
+          alertBox.innerHTML = `Attach Successfully & Submit Now`
           alertBox.style.cssText = ` 
-          color: green;
-          font-weight: bold;`
+          color: #0f5132;
+          background-color: #d1e7dd;
+          font-weight: bold`
           return true
         }
       }
@@ -49,6 +38,9 @@ profilePicsFile.addEventListener('change', function () {
     reader.readAsDataURL(uploadedFile)
   }
 })
+
+
+
 
 // 19.4 Setup Croppie JS -- eta korini tar bodole uploaded img er dimension & size niye validation korechi.
 // 19.5 Upload Profile Pics -- etar video lecture ta dekhechi but ami kaj profile pic upload er kaj ta onyovabe korechi. ami korechi muloto jokhon ekjon user profile create er jonyo data dibe tar sathey pic ta store hobe db te. etar kaj korechi dashboardController.js er createProfilePostController er modhye.

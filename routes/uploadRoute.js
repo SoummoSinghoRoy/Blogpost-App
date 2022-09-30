@@ -1,12 +1,15 @@
 const router = require('express').Router();
-const { isAuthenticated } = require('../middleware/authMiddleware');
-const upload = require('../middleware/uploadMiddleware');
-const { uploadProfilePicController } = require('../controllers/uploadController');
 
-router.post( '/profilePics', 
-            isAuthenticated, 
-            upload.single('profilePics'), 
-            uploadProfilePicController 
+const upload = require('../middleware/uploadMiddleware');
+const { 
+  uploadProfilePicGetController, 
+  uploadProfilePicPostController 
+} = require('../controllers/uploadController');
+
+router.get('/profile-pics', uploadProfilePicGetController)
+router.post( '/profile-pics', 
+            upload.single('profilePicsFile'), 
+            uploadProfilePicPostController 
           )
 
 module.exports = router;

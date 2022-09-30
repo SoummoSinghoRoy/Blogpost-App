@@ -15,22 +15,30 @@ exports.dashboardGetController = async (req, res, next) => {
         flashMessage: flash.getMessage(req)
       })
     }
-    res.redirect('/dashboard/create-profile')
+    res.redirect('/uploads/profile-pics')
   } catch (error) {
     next(error)
   }
 }
 
+
 exports.createProfileGetController = async (req, res, next) => {
   try {
+    let defaultPics = "/uploads/default.png"
+    let user = await User.findOne({_id: req.user._id })
+
+    if(user.profilePics === defaultPics) {
+      return res.redirect('/uploads/profile-pics')
+    }
+
     let profile = await Profile.findOne({user: req.user._id})
 
     if(profile) {
-      return res.redirect('/dashboard/edit-profile')
+      return res.redirect('/dashboard')
     }
     res.render('pages/dashboard/create-profile.ejs', 
       {
-        title: `Create Your Profile`,
+        title: `Create a profile`,
         flashMessage: flash.getMessage(req),
         error: {} 
       })
@@ -47,7 +55,7 @@ exports.createProfilePostController = async (req, res, next) => {
   if(!errors.isEmpty()) {
 
     return res.render('../views/pages/dashboard/create-profile', { 
-      title: 'Create Your Profile', 
+      title: 'Create a profile', 
       error: errors.mapped(), 
       flashMessage: flash.getMessage(req)
     })
@@ -59,7 +67,6 @@ exports.createProfilePostController = async (req, res, next) => {
   try {
 
     let existUser = await User.findOne({user: req.user._id})
-    let userProfilePics = `/uploads/${req.file.filename}`
 
     if(existUser) {
       let profile = new Profile({
@@ -67,7 +74,7 @@ exports.createProfilePostController = async (req, res, next) => {
         name,
         title,
         bio,
-        profilePics: userProfilePics,
+        profilePics: req.user.profilePics,
         links: {
           website: website || '',
           facebook: facebook || '',
@@ -86,13 +93,9 @@ exports.createProfilePostController = async (req, res, next) => {
       req.flash('success', 'profile created successfully')
       res.redirect('/dashboard')
     }
-    await User.findOneAndUpdate(
-      { _id: req.user._id },
-      {$set: { profilePics: userProfilePics } }
-    )
     
     res.render('../views/pages/dashboard/create-profile', { 
-      title: 'Create Your Profile', 
+      title: 'Create a profile', 
       flashMessage: flash.getMessage(req),
       error: {}
     })

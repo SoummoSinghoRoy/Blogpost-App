@@ -12,43 +12,20 @@
               <div class="card-body">
                 <h4> <%= title %>  </h4>
                 <h2 id="info"></h2>
-                <div class="row">
+                <div class="row py-2">
                   <div class="profile-pics col-4">
                     <img 
                       src=" <%= user.profilePics %> " 
                       alt="profile-pic"
-                      class="img-thumbnail img-fluid"
-                      id="profilePicsPreview"
+                      class="img-fluid"
+                      id="uploadedPic"
                     >
-                  </div>
-                  <div class="col-8">
-                    <div class="card">
-                      <div class="card-header">
-                        <h5>Instructions</h5>
-                      </div>
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item border-white">Image Dimension: </li>
-                        <li class="list-group-item border-white">width: 200px & height: 200px</li>
-                        <li class="list-group-item border-white">Image Size: less then 2Mb</li>
-                        <li class="list-group-item border-white" id="alertBox"></li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
                 
                 <div>
-                  <form action="/dashboard/create-profile" method="post" enctype="multipart/form-data">
+                  <form action="/dashboard/create-profile" method="post">
                     <div class="form-group py-2">
-                      <div class="input-group mb-3">
-                        <label class="input-group-text" for="profilePicsFile">Upload</label>
-                        <input 
-                          type="file" 
-                          class="form-control" 
-                          name="profilePicsFile" 
-                          id="profilePicsFile" 
-                          accept="images/*" 
-                        >
-                      </div>
                       <label for="name">Enter Your Name</label>
                       <input 
                         type="text"

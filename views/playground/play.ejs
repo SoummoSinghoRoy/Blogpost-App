@@ -7,26 +7,63 @@
       <div class="col-12 col-lg-6 col-md-6">
         <div class="card card-body my-4 mx-0 mx-lg-5 mx-md-5">
           <h4 class="text-secondary">Create A New Account</h4>
-          <form action="/playground/play" method="post" enctype="multipart/form-data" class="py-3">
-            <div class="row">
-              <div class="col">
-                <label for="username" class="form-label">Enter you username (must be unique)</label>
-                <input type="text" class="form-control" name="username" id="username">
-              </div>
+          <div class="row py-2">
+            <div class="col-6">
+              <img 
+                src="/uploads/default.png" 
+                alt="profile-pic"
+                class="img-fluid"
+                id="uploadedPic"
+              >
             </div>
-            <div class="row">
-              <div class="col">
-                <label for="my-file">Choose your file</label>
-                <input type="file" name="my-file" class="form-control">
-              </div>
+          </div>
+          <form action="/playground/play" id="profilePicsForm">
+            <div class="input-group mb-3">
+              <label class="input-group-text" for="UserProfilePic">Upload</label>
+              <input 
+                type="file" 
+                class="form-control" 
+                name="userProfilePic" 
+                id="userProfilePic" 
+                accept="images/*" 
+              >
             </div>
-            
-            <div class="row mt-3">
-              <div class="col-3">
-                <input type="submit" class="btn btn-primary" value="sign up">
-              </div>
-              <div class="col-9">
-                <p class="mt-2">Already have an account? <a href="/auth/login">login now</a></p>
+            <input type="submit" class="btn btn-primary" name="confirmUpload" id="confirmUpload" value="submit">
+            <div class="modal" id="imgModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Attachment</h5>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card border-white">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img 
+                              src="/uploads/default.png" 
+                              alt="profilepic" 
+                              class="img-thumbnail img-fluid"
+                              id="profilePicsPreview"
+                            >
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item border-white">Image Dimension: </li>
+                              <li class="list-group-item border-white">width: 200px & height: 200px</li>
+                              <li class="list-group-item border-white">Image Size: less then 2Mb</li>
+                              <li class="list-group-item border-white" id="successAlertBox"></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelUploading" data-bs-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-primary" id="confirmUploading" value="Attach">
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -38,6 +75,8 @@
   </div>
 
 <%- include('../partials/footer.ejs')  %>
+
+<script src="/scripts/profilePicsUpload.js"></script>
 </body>
 </html> 
 

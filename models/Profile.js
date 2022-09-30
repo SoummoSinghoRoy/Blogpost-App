@@ -24,11 +24,12 @@ const profileSchema = new Schema({
     maxlength: 200,
     required: true
   },
-  profilePics: {
-    type: String,
-    default: '/uploads/default.png',
-    required: true
-  },
+  // profilePics: {
+  //   type: String,
+  //   default: '/uploads/default.png',
+  //   required: true
+  // },
+  profilePics: String,
   links: {
     website: String,
     facebook: String,
