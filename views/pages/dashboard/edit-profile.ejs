@@ -10,46 +10,22 @@
             
             <div class="card">
               <div class="card-body">
-                <h4> <%= title %>  </h4>
+                <h4 class="text-center"> <%= title %>  </h4>
                 <h2 id="info"></h2>
-                <div class="row">
-                  <div class="profile-pics col-4">
+                <div class="row py-2">
+                  <div class="profile-pics col-12">
                     <img 
                       src=" <%= user.profilePics %> " 
                       alt="profile-pic"
-                      class="img-thumbnail img-fluid"
+                      class="img-thumbnail img-fluid float-end"
                       id="profilePicsPreview"
                     >
-                  </div>
-                  <div class="col-8">
-                    <div class="card">
-                      <div class="card-header">
-                        <h5>Instructions</h5>
-                      </div>
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item border-white">Image Dimension: </li>
-                        <li class="list-group-item border-white">width: 200px & height: 200px</li>
-                        <li class="list-group-item border-white">Image Size: less then 2Mb</li>
-                        <li class="list-group-item border-white" id="alertBox"></li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
                 
                 <div>
                   <form action="/dashboard/edit-profile" method="post">
                     <div class="form-group py-2">
-                      <div class="input-group mb-3">
-                        <label class="input-group-text" for="profilePicsFile">Upload</label>
-                        <input 
-                          type="file" 
-                          class="form-control" 
-                          name="profilePicsFile" 
-                          id="profilePicsFile" 
-                          accept="images/*"
-                          disabled 
-                        >
-                      </div>
                       <label for="name">Enter Your Name</label>
                       <input 
                         type="text"
@@ -157,7 +133,10 @@
                         >
                       </div>
                     </div>
-                    <input type="submit" class="btn btn-primary" value="update profile">
+                    <div class="d-grid gap-2 d-md-flex justify-content-between">
+                      <input type="submit" class="btn btn-primary" value="update profile">
+                      <!-- <a href="/" class="btn btn-danger" type="button">delete profile</a> -->
+                    </div>
                   </form>
                 </div>
               </div>

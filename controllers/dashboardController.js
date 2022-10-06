@@ -107,15 +107,15 @@ exports.createProfilePostController = async (req, res, next) => {
 
 exports.editProfileGetController = async (req, res, next) => {
   try {
-    
+
     let profile = await Profile.findOne({user: req.user._id})
 
     if(!profile) {
-      return res.redirect('../views/pages/dashboard/create-profile.ejs')
+      return res.redirect('/dashboard/create-profile')
     }
 
     res.render('../views/pages/dashboard/edit-profile.ejs', {
-      title: 'edit profile', 
+      title: 'Edit your profile', 
       profile,
       flashMessage: flash.getMessage(req),
       error: {} 
@@ -136,7 +136,7 @@ exports.editProfilePostController = async (req, res, next) => {
   if(!errors.isEmpty()) {
 
     return res.render('../views/pages/dashboard/edit-profile', { 
-      title: 'edit profile', 
+      title: 'Edit your profile', 
       error: errors.mapped(), 
       flashMessage: flash.getMessage(req),
       profile: {
@@ -173,7 +173,7 @@ exports.editProfilePostController = async (req, res, next) => {
 
     req.flash('success', 'profile updated successfully')
     res.render('../views/pages/dashboard/edit-profile.ejs', {
-      title: 'edit profile', 
+      title: 'Edit your profile', 
       flashMessage: flash.getMessage(req),
       error: {},
       profile: updatedProfile 
@@ -183,6 +183,7 @@ exports.editProfilePostController = async (req, res, next) => {
     next(error)
   }
 }
+
 
 // 15.12 IsAuthenticated Middleware -- etar kaj kora hoyeche authMiddleware er modhye.
 
@@ -198,3 +199,8 @@ exports.editProfilePostController = async (req, res, next) => {
 // 19.9 Save Profile Data -- ekhane mouloto profile pic + data eksathe save kora hocche createProfilePostController theke. kintu lecture e ektu vinno vabe kaj kora. 
 // 19.10 Edit Profile Template -- etar kaj korechi edit-profile.ejs, editProfileGetController & etar route er modhye.
 // 19.12 Bug Fixing -- ei lecture ta jodio ami jevabe profile niye kaj korechi tar sathe somprikto na tobuo porobortite emon kono kaj korle kaje lagbe.
+
+/* projecter structural ekta change enechi stack learner ek rokom koreche but ami profile pic uploader por profile create korte diyechi. er por ekjon user profile delete korte chaile ki hobe tar jonyo kaj korte hobe ebong tar sathe upload folder theke tar pic ta jeno delete hoye jai profile delete korar sathe sei kajtio korte hobe. */ 
+
+// 20.1 Intro -- work with post feature & sidebar
+// 20.2 Create Post Template -- etar kaj korechi views --> pages --> dashboard --> post --> createPost.ejs e, route handle korechi routes --> postRoute.js e.
