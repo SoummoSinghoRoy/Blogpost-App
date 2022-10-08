@@ -62,4 +62,17 @@ exports.uploadProfilePicPostController = async (req, res, next) => {
   }
 }
 
+exports.postImageUploadController = (req, res, next) => {
+  
+  if(req.file) {
+    return res.status(200).json({
+      imgUrl: `/uploads/${req.file.filename}`
+    })
+  }
+  return res.status(500).json({
+    message: 'server error'
+  })
+}
+
 // 19.3 Upload Controller and Routes -- etar router er kaj korechi routes -> uploadRoute.js e.
+// 20.4 Tiny MCE Bachend~backend -- ekhane post er sathe je img upload hobe seti handle kora hoyeche & uploadRoute e bybohar kora hoyeche.
