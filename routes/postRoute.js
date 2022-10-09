@@ -5,9 +5,10 @@ const {
   createBlogPost_GetController,
   createBlogPost_PostController
 } = require('../controllers/postController');
+const upload = require('../middleware/uploadMiddleware');
 
 router.get('/create', isAuthenticated, createBlogPost_GetController);
-router.post('/create', isAuthenticated, postValidator, createBlogPost_PostController);
+router.post('/create', isAuthenticated, upload.single('post-thumbnail'), postValidator, createBlogPost_PostController);
 
 module.exports = router;
 

@@ -18,7 +18,7 @@ const postSchema = new Schema({
     ref: 'User',
     required: true
   },
-  tag: {
+  tags: {
     type: [String],
     required: true
   },
