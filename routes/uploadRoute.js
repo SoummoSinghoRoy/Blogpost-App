@@ -7,7 +7,7 @@ const {
   postImageUploadController 
 } = require('../controllers/uploadController');
 
-router.get('/profile-pics', uploadProfilePicGetController)
+router.get('/profile-pics', isAuthenticated, uploadProfilePicGetController)
 router.post('/profile-pics',
             isAuthenticated,
             upload.single('profilePicsFile'), 

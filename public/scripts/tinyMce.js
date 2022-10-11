@@ -36,6 +36,7 @@ window.onload = function () {
     toolbar: 'bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | forecolor backcolor emoticons | code preview',
     height: 400,
     automatic_uploads: true,
+    relative_urls: false,
     images_upload_url: '/uploads/postimage',
     images_upload_handler: example_image_upload_handler
   })

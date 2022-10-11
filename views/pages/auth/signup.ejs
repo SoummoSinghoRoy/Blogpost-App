@@ -12,7 +12,7 @@
               <div class="col">
                 <label for="username" class="form-label">Enter you username (must be unique)</label>
                 <input type="text" class="form-control <%= error.username ? 'is-invalid' : '' %>" name="username" id="username" value="<%= value.username ? value.username : '' %>">
-                <p class="validation-feedback">
+                <p class="validation-feedback text-danger">
                   <%= error.username && error.username %> 
                 </p>
               </div>
@@ -21,7 +21,7 @@
               <div class="col">
                 <label for="email" class="form-label">Enter you email (use correct email)</label>
                 <input type="email" class="form-control <%= error.email ? 'is-invalid' : '' %>" name="email" id="email" value="<%= value.email ? value.email : '' %>" >
-                <p class="validation-feedback">
+                <p class="validation-feedback text-danger">
                   <%= error.email && error.email %> 
                 </p>
               </div>
@@ -30,7 +30,7 @@
               <div class="col">
                 <label for="password" class="form-label">Enter you password (password must be strong)</label>
                 <input type="password" class="form-control <%= error.password ? 'is-invalid' : '' %>" name="password" id="password" value="<%= value.password ? value.password : '' %>">
-                <p class="validation-feedback">
+                <p class="validation-feedback text-danger">
                   <%= error.password && error.password %> 
                 </p>
               </div>
@@ -39,7 +39,7 @@
               <div class="col">
                 <label for="confirmPassword" class="form-label">Confirm your password</label>
                 <input type="password" class="form-control <%= error.confirmPassword ? 'is-invalid' : '' %>" name="confirmPassword" id="confirmPassword">
-                <p class="validation-feedback">
+                <p class="validation-feedback text-danger">
                   <%= error.confirmPassword && error.confirmPassword %> 
                 </p>
               </div>

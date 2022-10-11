@@ -18,6 +18,9 @@ module.exports = [
         }
         return true
       })
+  ,
+  body('tags')
+      .notEmpty().withMessage(`tags can't be empty`)
 ]
 
 // 20.5 Post Validation -- ekhane post er jonyo validation kora hoyeche, eta bybohar kora hoyeche postRoute e.
