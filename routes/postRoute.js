@@ -5,7 +5,9 @@ const {
   createBlogPost_GetController,
   createBlogPost_PostController,
   editPostGetController,
-  editPost_PostController
+  editPost_PostController,
+  deletePostController,
+  getAllPostController
 } = require('../controllers/postController');
 const upload = require('../middleware/uploadMiddleware');
 
@@ -25,7 +27,11 @@ router.post('/edit/:postId',
           isAuthenticated, 
           upload.single('post-thumbnail'), 
           postValidator, 
-          editPost_PostController)
+          editPost_PostController);
+
+router.get('/delete/:postId', isAuthenticated, deletePostController);
+
+router.get('/', isAuthenticated, getAllPostController)
 
 module.exports = router;
 

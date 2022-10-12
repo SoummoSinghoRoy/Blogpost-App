@@ -77,7 +77,7 @@ exports.editPostGetController = async (req, res, next) => {
     if(!post) {
       let error = new Error('4O4 not found')
       error.status = 404
-      throw new error
+      throw error
     }
 
     res.render('../views/pages/dashboard/post/editPost.ejs', {
@@ -102,7 +102,7 @@ exports.editPost_PostController = async (req, res, next) => {
     if(!post) {
       let error = new Error('4O4 not found')
       error.status = 404
-      throw new error
+      throw error
     }
 
     if(!errors.isEmpty()) {
@@ -138,6 +138,43 @@ exports.editPost_PostController = async (req, res, next) => {
   }
 }
 
+exports.deletePostController = async (req, res, next) => {
+  let {postId} = req.params
+
+  try {
+    let post = await Post.findOne({author: req.user._id, _id: postId})
+
+    if(!post) {
+      let error = new Error('404 not found')
+      error.status = 404
+      throw error
+    }
+    await Post.findOneAndDelete({_id: postId})
+    await Profile.findOneAndUpdate(
+      {user: req.user._id},
+      {$pull: {'posts': post._id}}
+    )
+    req.flash('success', 'post deleted successfully')
+    res.redirect('/posts')
+
+  } catch (error) {
+    next(error)
+  }
+}
+
+exports.getAllPostController = async (req, res, next) => {
+  try {
+    let posts = await Post.find({author: req.user._id})
+
+    res.render('../views/pages/dashboard/post/posts.ejs', {
+      title: 'All Posts',
+      posts,
+      flashMessage: Flash.getMessage(req)
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 
 // 20.2 Create Post Template -- handle all controller for post feature in here.
 // 20.3 Tiny MCE Front End Setup -- etar kaj korechi createPost.ejs & public --> script --> tineMce.js file e.
@@ -148,3 +185,5 @@ exports.editPost_PostController = async (req, res, next) => {
 // 20.9 Edit Post Template -- etar jonyo views --> pages --> dashboard --> post --> editPost.ejs e, post controller er modhye editPostGetController, postRoute e kaj kora hoyeche.
 // 20.10 Update Post -- etar kaj kora hoyeche editPost_PostController.
 // 20.11 Test Our Edit Functionality -- ekhane test kora hoyeche & postRoute e kaj kora hoyeche.
+// 20.12 Delete Post -- etar kaj kora hoyeche editPost.ejs, deletePostController e & postRoute e
+// 20.13 Get All My Posts -- posts.ejs e, getAllPostController, postRoute e.

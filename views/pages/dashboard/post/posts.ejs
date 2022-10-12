@@ -1,0 +1,42 @@
+<%- include('../../../partials/header.ejs')  %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3"></div>
+
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-body d-flex">
+            <h4 class="card-title"><%= title %></h4>
+            <a href="/posts/create" class="card-link ms-auto">create a post now</a>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <% if (posts.length === 0) { %>
+                <div class="card-body">
+                  <h4 class="card-title text-center text-muted">posts not found</h4>
+                  <a href="/posts/create" class="card-link">create a post now</a>
+                </div>
+              <% }else { %>
+                <% for( let post of posts.reverse() ) { %>
+                  <div class="card col-3">
+                    <% if (post.thumbnail) { %>
+                      <img src="<%= post.thumbnail %> " class="card-img-top" alt="post thumbnail">
+                    <% } %>
+                    <div class="card-body">
+                      <a href="/posts/edit/<%= post._id %> " class="text-dark h5"><%= post.title %> </a>
+                    </div>
+                  </div>
+                <% } %>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include('../../../partials/footer.ejs')  %>
+
+</body>
+</html> 
