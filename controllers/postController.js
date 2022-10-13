@@ -4,6 +4,7 @@ const errorFormatter = require('../utils/validationErrorFormatter');
 const readingTime = require('reading-time');
 const Post = require('../models/Post');
 const Profile = require('../models/Profile');
+const fs = require('fs');
 
 exports.createBlogPost_GetController = (req, res, next) => {
   res.render('../views/pages/dashboard/post/createPost.ejs', {
@@ -122,6 +123,11 @@ exports.editPost_PostController = async (req, res, next) => {
 
     let thumbnail = post.thumbnail
     if(req.file) {
+      fs.unlink(`public${thumbnail}`, (error) => {
+        if(error) {
+          throw error
+        }
+      })
       thumbnail = `/uploads/${req.file.filename}`
     }
 
@@ -149,11 +155,19 @@ exports.deletePostController = async (req, res, next) => {
       error.status = 404
       throw error
     }
+
     await Post.findOneAndDelete({_id: postId})
     await Profile.findOneAndUpdate(
       {user: req.user._id},
       {$pull: {'posts': post._id}}
     )
+
+    fs.unlink(`public${post.thumbnail}`, (error) => {
+      if(error) {
+        throw error
+      }
+    })
+
     req.flash('success', 'post deleted successfully')
     res.redirect('/posts')
 
@@ -186,4 +200,6 @@ exports.getAllPostController = async (req, res, next) => {
 // 20.10 Update Post -- etar kaj kora hoyeche editPost_PostController.
 // 20.11 Test Our Edit Functionality -- ekhane test kora hoyeche & postRoute e kaj kora hoyeche.
 // 20.12 Delete Post -- etar kaj kora hoyeche editPost.ejs, deletePostController e & postRoute e
-// 20.13 Get All My Posts -- posts.ejs e, getAllPostController, postRoute e.
+// 20.13 Get All My Posts -- etar kaj kora hoyeche posts.ejs e, getAllPostController, postRoute e.
+// 20.14 Creating Side Bar -- etar template banano hoyeche partials --> sidebar.ejs e & bivinno template page e eti include kora hoyeche.
+
