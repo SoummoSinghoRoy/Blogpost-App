@@ -203,3 +203,5 @@ exports.getAllPostController = async (req, res, next) => {
 // 20.13 Get All My Posts -- etar kaj kora hoyeche posts.ejs e, getAllPostController, postRoute e.
 // 20.14 Creating Side Bar -- etar template banano hoyeche partials --> sidebar.ejs e & bivinno template page e eti include kora hoyeche.
 
+// 21.1 Intro(rest api) -- ei chapter er lecture gulo rest api'r opor sajano hoyeche, ei project er api'r kaj kora hobe api folder theke --> routes --> apiRoutes.js. 
+

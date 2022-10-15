@@ -37,8 +37,9 @@
               <label class="input-group-text" for="inputGroupFile02">Upload</label>
             </div>
             <input type="submit" class="btn btn-primary my-2" value="update post">
-            <a class="btn btn-danger float-end mt-2" href="/posts/delete/<%= post._id %> " role="button">delete post</a>
-            
+
+            <!-- <a class="btn btn-secondary mt-2" href="#" role="button" id="deleteBtn">delete post</a> -->
+            <a class="btn btn-danger float-end mt-2" href="/posts/delete/<%= post._id %> " role="button" id="deleteBtn">delete post</a>
           </form>
         </div>
       </div>

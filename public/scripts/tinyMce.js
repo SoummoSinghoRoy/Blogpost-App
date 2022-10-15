@@ -77,9 +77,48 @@ const example_image_upload_handler = (blobInfo, progress) => new Promise((resolv
 
   const formData = new FormData();
   formData.append('post-img', blobInfo.blob(), blobInfo.filename());
-
   xhr.send(formData);
 });
+
+/*let deleteBtn = document.getElementById('deleteBtn');
+let textBody = document.getElementById('tiny-mce-post-body');
+
+deleteBtn.addEventListener('click', function () {
+
+  let ConvertStringToHTML = (str) => {
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(str, 'text/html');
+    return doc.body.children
+  };
+
+  let elementsCollection = ConvertStringToHTML(textBody.value);
+  let elementsArray = []
+
+  if(elementsCollection.length > 0) {
+    elementsArray.push(...elementsCollection)
+  }
+
+  if(elementsArray.length > 0) {
+    elementsArray.forEach(element => {
+        if(element.firstElementChild) {
+          let eleSrcValue = element.firstElementChild.src
+          let string = new String(eleSrcValue)
+          let actualPath = string.slice(21)
+          
+          fs.unlink(actualPath, (error) => {
+            throw error
+          })
+        }
+      }
+    )
+  }  
+})*/
+
+
+
+
+
+
 
 // note: amra fetch method use korte pari abar xmlhttprequest darao korte pari. most prefer xhr method.
 
