@@ -29,7 +29,7 @@ exports.createCommentPostController = async (req, res, next) => {
       select: 'profilePics username'
     })
     return res.status(201).json(commentJSON)
-    
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -38,5 +38,36 @@ exports.createCommentPostController = async (req, res, next) => {
   }
 }
 
+exports.replyCommentPostController = async (req, res, next) => {
+  let {commentId} = req.params;
+  let {body} = req.body;
+
+  if(!req.user) {
+    res.status(403).json({
+      error: 'you are not an authenticated user'
+    })
+  }
+
+  let reply = {
+    body,
+    user: req.user._id
+  }
+  try {
+    await Comment.findOneAndUpdate(
+      {_id: commentId},
+      {$push: {'replies': reply}}
+    )
+    res.status(201).json({
+      ...reply,
+      profilePics: req.user.profilePics
+    })
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      error: 'server error occured'
+    })
+  }
+}
 
 //21.2 Create Comment API -- ekahne comment api'r controller niye kaj korechi & er route hanle hobe apiRoute.js e.
+// 21.3 Create Reply Controller API -- etar kaj kora hoyeche replyCommentPostController er modhye & route er kaj kora hoyeche apiRoutes.js e.
