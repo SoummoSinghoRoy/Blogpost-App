@@ -71,3 +71,4 @@ exports.replyCommentPostController = async (req, res, next) => {
 
 //21.2 Create Comment API -- ekahne comment api'r controller niye kaj korechi & er route hanle hobe apiRoute.js e.
 // 21.3 Create Reply Controller API -- etar kaj kora hoyeche replyCommentPostController er modhye & route er kaj kora hoyeche apiRoutes.js e.
+// 21.4 Create Like API -- etar kaj kora hoyeche likeDislikeController.js e.
