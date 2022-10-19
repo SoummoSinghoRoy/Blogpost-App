@@ -11,11 +11,15 @@ const {
   blogPostDisLikesGetController
 } = require('../controllers/likeDislikeController');
 
+const {blogPostBookmarksGetController} = require('../controllers/bookmarkController');
+
 router.post('/comments/:postId', isAuthenticated, createCommentPostController);
 router.post('/comments/replies/:commentId', isAuthenticated, replyCommentPostController);
 
 router.get('likes/:postId', isAuthenticated, blogPostLikesGetController);
 router.get('dislikes/:postId', isAuthenticated, blogPostDisLikesGetController);
+
+router.get('/bookmarks/:postId', isAuthenticated, blogPostBookmarksGetController);
 
 module.exports = router;
 
@@ -24,3 +28,4 @@ module.exports = router;
 // 21.3 Create Reply Controller API -- replyCommentPostController er route er kaj kora hoyeche apiRoutes.js e.
 // 21.4 Create Like API -- ekhane blogPostLikesGetController route handle kora hoyeche.
 // 21.5 Create Dislike Controller API -- ekhane blogPostDisLikesGetController route handle kora hoyeche.
+// 21.6 Create Bookmarks Controller API -- ekhane blogPostBookmarksGetController route hanlde kora hoyeche.

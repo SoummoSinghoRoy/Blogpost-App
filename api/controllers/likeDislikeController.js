@@ -2,7 +2,6 @@ const Post = require('../../models/Post');
 
 exports.blogPostLikesGetController = async (req, res, next) => {
   let {postId} = req.params
-  let userId = req.user._id
   let liked = null;
 
   if(!req.user) {
@@ -11,6 +10,7 @@ exports.blogPostLikesGetController = async (req, res, next) => {
     })
   }
 
+  let userId = req.user._id
   try {
     
     let post = await Post.findById(postId);
@@ -54,7 +54,6 @@ exports.blogPostLikesGetController = async (req, res, next) => {
 
 exports.blogPostDisLikesGetController = async (req, res, next) => {
   let {postId} = req.params
-  let userId = req.user._id
   let disliked = null;
 
   if(!req.user) {
@@ -62,6 +61,8 @@ exports.blogPostDisLikesGetController = async (req, res, next) => {
       error: 'you are not an authenticated user'
     })
   }
+  
+  let userId = req.user._id
   try {
     let post = await Post.findById(postId);
 
@@ -103,4 +104,4 @@ exports.blogPostDisLikesGetController = async (req, res, next) => {
 
 // 21.4 Create Like API -- blogPostLikesGetController er modhye kaj kora hoyeche & apiRoute e route handle kora hoyeche.
 // 21.5 Create Dislike Controller API -- blogPostDisLikesGetController er modhye kaj kora hoyeche & apiRoute e route handle kora hoyeche & apiRoute e route handle kora hoyeche.
-// next start here
+// 21.6 Create Bookmarks Controller API -- etar kaj kora hoyeche bookmarkController.js e
