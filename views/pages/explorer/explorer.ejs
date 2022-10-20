@@ -1,0 +1,21 @@
+<%- include('../../partials/header.ejs') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-sm-3">
+      <section class="my-5">
+        <a href="/explorer?filter=latest" class="btn <%= filter == 'latest' ? 'btn-primary' :  'btn-secondary'%>">latest</a>
+        <a href="/explorer?filter=week" class="btn <%= filter == 'week' ? 'btn-primary' :  'btn-secondary'%>">week</a>
+        <a href="/explorer?filter=month" class="btn <%= filter == 'month' ? 'btn-primary' :  'btn-secondary'%>">month</a>
+        <a href="/explorer?filter=all" class="btn <%= filter == 'all' ? 'btn-primary' :  'btn-secondary'%>">all</a>
+      </section>
+      <section>
+        <p>There is no posts</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+</body>
+</html>
