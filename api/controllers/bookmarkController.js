@@ -41,4 +41,3 @@ exports.blogPostBookmarksGetController = async (req, res, next) => {
 // 21.6 Create Bookmarks Controller API -- etar kaj kora hoyeche blogPostBookmarksGetController e & route hanlde kora hoyeche apiRoute.js.
 
 // 22.1 Setup explorer files (eta stack learner er youtube playlist e missing tai oder official site er course theke korechi) -- etar kaj kora hoyeche views --> pages --> explorer --> explorer.ejs, controller --> explorerController.js e
-// 22.2 Explorer Template -- 

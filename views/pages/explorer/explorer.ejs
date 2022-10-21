@@ -3,16 +3,43 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-sm-3">
-      <section class="my-5">
+      <div class="my-5 d-flex justify-content-center">
         <a href="/explorer?filter=latest" class="btn <%= filter == 'latest' ? 'btn-primary' :  'btn-secondary'%>">latest</a>
-        <a href="/explorer?filter=week" class="btn <%= filter == 'week' ? 'btn-primary' :  'btn-secondary'%>">week</a>
-        <a href="/explorer?filter=month" class="btn <%= filter == 'month' ? 'btn-primary' :  'btn-secondary'%>">month</a>
-        <a href="/explorer?filter=all" class="btn <%= filter == 'all' ? 'btn-primary' :  'btn-secondary'%>">all</a>
-      </section>
-      <section>
-        <p>There is no posts</p>
-      </section>
+        <a href="/explorer?filter=week" class="btn <%= filter == 'week' ? 'btn-primary' :  'btn-secondary'%> ms-2">week</a>
+        <a href="/explorer?filter=month" class="btn <%= filter == 'month' ? 'btn-primary' :  'btn-secondary'%> mx-2">month</a>
+        <a href="/explorer?filter=all" class="btn <%= filter == 'all' ? 'btn-primary' :  'btn-secondary'%> ms-2">all</a>
+      </div>
     </div>
+  </div>
+  <div class="row">
+    <section>
+      <% if (posts.length === 0) { %>
+        <div class="col-12">
+          <p>There is no posts</p>
+        </div>
+      <% }else{ %>
+        <% for(let post of posts) {%>
+          <div class="col-4">
+            <div class="card card-body my-3">
+              <% if (post.thumbnail) { %>
+               <img src="<%= post.thumbnail %>" class="img-fluid mb-2"/>
+              <% } %>
+              <a href="/explorer/<%= post._id %>" class="text-secondary">
+                <h5><%= post.title %></h5>
+                <p><%= truncate(post.body) %> </p>
+              </a>
+              <div class="d-flex">
+                <small class="text-secondary">
+                  <%= moment(post.createdAt) %>, 
+                  <%= post.readTime %>,
+                  posted by - <%= post.author.username %>  
+                </small>
+              </div>
+            </div>
+          </div>
+        <% } %>  
+      <% } %>     
+    </section>
   </div>
 </div>
 
