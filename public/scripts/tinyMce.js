@@ -32,7 +32,7 @@
 window.onload = function () {
   tinymce.init({
     selector: "#tiny-mce-post-body",
-    plugins: ['a11ychecker', 'advcode', 'advlist', 'lists', 'link', 'checklist', 'autolink', 'autosave', 'code', 'preview', 'searchreplace', 'wordcount', 'media', 'table', 'emoticons', 'image', 'imagetools'],
+    plugins: ['advlist', 'lists', 'link', 'autolink', 'autosave', 'code', 'preview', 'searchreplace', 'wordcount', 'media', 'table', 'emoticons', 'image', 'imagetools'],
     toolbar: 'bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | forecolor backcolor emoticons | code preview',
     height: 400,
     automatic_uploads: true,

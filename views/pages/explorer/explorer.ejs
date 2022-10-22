@@ -18,8 +18,8 @@
           <p>There is no posts</p>
         </div>
       <% }else{ %>
-        <% for(let post of posts) {%>
-          <div class="col-4">
+        <div class="col-6 mx-auto">
+          <% for(let post of posts) {%>
             <div class="card card-body my-3">
               <% if (post.thumbnail) { %>
                <img src="<%= post.thumbnail %>" class="img-fluid mb-2"/>
@@ -36,8 +36,8 @@
                 </small>
               </div>
             </div>
-          </div>
-        <% } %>  
+          <% } %>  
+        </div>
       <% } %>     
     </section>
   </div>
