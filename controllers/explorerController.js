@@ -1,6 +1,7 @@
 const moment = require('moment');
 const Flash = require('../utils/Flash');
 const Post = require('../models/Post');
+const Profile = require('../models/Profile');
 
 function generatedate(days) {
   let date = moment().subtract(days, 'days')
@@ -61,6 +62,15 @@ exports.explorerGetController = async (req, res, next) => {
     let totalPost = await Post.countDocuments()
     let totalPage = totalPost / itemPerPage
 
+    let bookmarks = []
+    if(req.user) {
+      let profile = await Profile.findOne({user: req.user._id})
+
+      if(profile) {
+        bookmarks = profile.bookmarks
+      }
+    }           
+
     res.render('../views/pages/explorer/explorer.ejs', {
       title: 'Explore all post',
       filter,
@@ -68,6 +78,7 @@ exports.explorerGetController = async (req, res, next) => {
       currentPage,
       itemPerPage,
       totalPage,
+      bookmarks,
       flashMessage: Flash.getMessage(req)
     })
 
@@ -80,3 +91,4 @@ exports.explorerGetController = async (req, res, next) => {
 // 22.2 Explorer Template -- explorerGetController er modhye kaj kora hoyeche.
 // 22.3 Create Filter Functionalities -- explorerGetController er modhye kaj kora hoyeche.
 // 22.4 Create Pagination Functionalities -- explorerGetController er modhye & eplorer.ejs e kaj kora hoyeche.
+// 22.5 Add Bookmarks -- etar kaj korechi explorer.ejs, explorerGetController, public --> sript --> bookmarks.js e.
