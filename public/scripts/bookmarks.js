@@ -38,3 +38,4 @@ window.onload = function () {
 
 // 22.5 Add Bookmarks -- ekhane front end script lekha hoyeche ar baki kaj  korechi explorer.ejs, explorerGetController e.
 // 22.6 Single Post Page Template -- etar kaj kora hoyeche views --> pages --> explorer --> singlePostPage.ejs e.
+// 22.7 Single Page Controller -- etar kaj kora hoyeche controller --> explorerController e.

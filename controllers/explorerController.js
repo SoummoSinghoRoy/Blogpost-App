@@ -65,7 +65,6 @@ exports.explorerGetController = async (req, res, next) => {
     let bookmarks = []
     if(req.user) {
       let profile = await Profile.findOne({user: req.user._id})
-
       if(profile) {
         bookmarks = profile.bookmarks
       }
@@ -87,8 +86,57 @@ exports.explorerGetController = async (req, res, next) => {
   }
 }
 
+exports.singlePostPageGetController = async (req, res, next) => {
+  let {postId} = req.params
+
+  try {
+    let post = await Post.findById(postId)
+                         .populate('author', 'username profilePics')
+                         .populate({
+                          path: 'comments',
+                          populate: {
+                            path: 'user',
+                            select: 'username profilePics'
+                          }
+                         })
+                         .populate({
+                          path:'comments',
+                          populate: {
+                            path: 'replies.user',
+                            select: 'username profilePics'
+                          }
+                         })
+    
+    if(!post) {
+      let error = new Error('404 page not found')
+      error.status = 404
+      throw error
+    }
+
+    let bookmarks = []
+
+    if(req.user) {
+      let profile = await Profile.findOne({user: req.user._id})
+      if(profile) {
+        bookmarks = profile.bookmarks
+      }
+    }
+
+    res.render('../views/pages/explorer/singlePostPage.ejs', {
+      title: post.title,
+      flashMessage: Flash.getMessage(req),
+      post,
+      bookmarks
+    })
+
+  } catch (error) {
+    next(error)
+  }
+}
+
 // 22.1 Setup explorer files -- explorerGetController er modhye kaj kora hoyeche ebong er route handle kora hoyeche routes --> explorerRoute.js e.
 // 22.2 Explorer Template -- explorerGetController er modhye kaj kora hoyeche.
 // 22.3 Create Filter Functionalities -- explorerGetController er modhye kaj kora hoyeche.
 // 22.4 Create Pagination Functionalities -- explorerGetController er modhye & eplorer.ejs e kaj kora hoyeche.
 // 22.5 Add Bookmarks -- etar kaj korechi explorer.ejs, explorerGetController, public --> sript --> bookmarks.js e.
+// 22.7 Single Page Controller -- etar kaj kora hoyeche singlePostPageGetController e & route handle korechi routes --> explorerRoute.js e.
