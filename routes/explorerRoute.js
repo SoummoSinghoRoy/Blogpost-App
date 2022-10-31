@@ -16,5 +16,4 @@ module.exports = router;
 
 // 22.2 Explorer Template -- etar kaj kora hoyeche explorer.ejs, setLocal.js & explorerController.js e.
 // 22.7 Single Page Controller -- etar route controller er kaj korechi korechi explorerController.js er singlePostPageGetController.
-
-
+// 22.8 Like Functionalities Frontend -- etar kaj kora hoyeche public --> likeDislike.js e.

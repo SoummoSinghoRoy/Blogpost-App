@@ -16,8 +16,8 @@ const {blogPostBookmarksGetController} = require('../controllers/bookmarkControl
 router.post('/comments/:postId', isAuthenticated, createCommentPostController);
 router.post('/comments/replies/:commentId', isAuthenticated, replyCommentPostController);
 
-router.get('likes/:postId', isAuthenticated, blogPostLikesGetController);
-router.get('dislikes/:postId', isAuthenticated, blogPostDisLikesGetController);
+router.get('/likes/:postId', isAuthenticated, blogPostLikesGetController);
+router.get('/dislikes/:postId', isAuthenticated, blogPostDisLikesGetController);
 
 router.get('/bookmarks/:postId', isAuthenticated, blogPostBookmarksGetController);
 
