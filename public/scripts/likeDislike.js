@@ -2,7 +2,7 @@ window.onload = function () {
   const likeBtn = document.getElementById('likeBtn');
   const disLikeBtn = document.getElementById('disLikeBtn');
   
-  likeBtn.addEventListener('click', function(event){
+  likeBtn.addEventListener('click', function(){
     let postId = likeBtn.dataset.post
 
     reqLikeDislike('likes', postId)
@@ -21,7 +21,7 @@ window.onload = function () {
                   })
   })
 
-  disLikeBtn.addEventListener('click', function(event){
+  disLikeBtn.addEventListener('click', function(){
     let postId = disLikeBtn.dataset.post
 
     reqLikeDislike('disLikes', postId)
@@ -39,21 +39,22 @@ window.onload = function () {
                     alert(err.response.data.error)
                   })
   })
+}
 
-  function reqLikeDislike(reactType, postId) {
-    let headers = new Headers()
-    headers.append('Accept', 'Application/JSON')
-    headers.append('Content-Type', 'Application/JSON')
+function reqLikeDislike(reactType, postId) {
+  let headers = new Headers()
+  headers.append('Accept', 'Application/JSON')
+  headers.append('Content-Type', 'Application/JSON')
 
-    let req = new Request(`/api/${reactType}/${postId}`, {
-      method: 'GET',
-      headers,
-      mode: 'cors'
-    })
+  let req = new Request(`/api/${reactType}/${postId}`, {
+    method: 'GET',
+    headers,
+    mode: 'cors'
+  })
 
-    return fetch(req)
-  }
+  return fetch(req)
 }
 
 
-// 22.8 Like Functionalities Frontend -- like dislike er kaj front theke kora hoyeche ekhane & er script add kora hoyeche singlePostPage.ejs e.
+// 22.8 Like Functionalities Frontend -- like dislike er kaj front end theke kora hoyeche ekhane & er script add kora hoyeche singlePostPage.ejs e.
+// 22.9 Handle Comments From Frontend -- etar kaj kora hoyeche comment.js theke.

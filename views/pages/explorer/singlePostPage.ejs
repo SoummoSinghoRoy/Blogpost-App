@@ -53,7 +53,7 @@
               <label for="comment">Leave a comment</label>
               <input type="text" class="form-control" id="comment" placeholder="press enter to submit a comment" data-post="<%= post._id %> ">
             </div>
-            <div class="mt-3" id="comment-holder">
+            <div class="mt-3" id="commentHolder">
               <% if (post.comments.lenght === 0) { %>
                <p class="text-muted"> there have no comment</p>
               <% } else{ %>
@@ -92,5 +92,6 @@
 <%- include('../../partials/footer.ejs') %>
 <script src="/scripts/bookmarks.js"></script>
 <script src="/scripts/likeDislike.js"></script>
+<script src="/scripts/comment.js"></script>
 </body>
 </html>
