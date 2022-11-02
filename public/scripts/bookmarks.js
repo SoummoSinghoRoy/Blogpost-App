@@ -28,9 +28,9 @@ window.onload = function () {
               </svg>`
               }
             })
-            .catch(error => {
-              console.error(error.response.data);
-              alert(error.response.data)
+            .catch(err => {
+              console.error(err.message);
+              alert(err.message)
             })
     })
   })

@@ -16,8 +16,8 @@ window.onload = function () {
                     disLikeBtn.innerHTML = dislikeText
                   })
                   .catch(err => {
-                    console.log(err);
-                    alert(err.response.data.error)
+                    console.log(err.message);
+                    alert(err.message)
                   })
   })
 
@@ -35,8 +35,8 @@ window.onload = function () {
                     likeBtn.innerHTML = likeText
                   })
                   .catch(err => {
-                    console.log(err);
-                    alert(err.response.data.error)
+                    console.log(err.message);
+                    alert(err.message)
                   })
   })
 }
