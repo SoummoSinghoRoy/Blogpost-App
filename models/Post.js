@@ -46,8 +46,22 @@ const postSchema = new Schema({
   timestamps: true
 })
 
+postSchema.index({
+  title: 'text',
+  body: 'text',
+  tags: 'text'
+},{
+  weights: {
+    title: 5,
+    tags: 5,
+    body: 2
+  }
+})
+
 const Post = model('Post', postSchema);
 
 module.exports = Post;
 
 // 12.7 Comment Model -- etar kaj korechi Comment.js file e.
+
+// 22.11 Create Search Backend -- searching keyword niye kaj kora hoyeche & controller er kaj kora hoyeche controllers --> searchController.js e.

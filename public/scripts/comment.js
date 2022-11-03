@@ -105,4 +105,5 @@ function createReplyElement (reply) {
 }
 
 // 22.9 Handle Comments From Frontend -- comment er kaj front end theke kora hoyeche ekhane & er script add kora hoyeche singlePostPage.ejs e.
-// 22.10 Reply Comment from Frontend
+// 22.10 Reply Comment from Frontend -- etar kaj ei file ei kora hoyeche jehetu comment er under e theke reply comment kaj korbe.
+// 22.11 Create Search Backend -- etar kaj kora hoyeche models --> post.js e.
