@@ -8,7 +8,7 @@ exports.searchResultGetController = async (req, res, next) => {
   let itemPerPage = 10
   
   try {
-    let post = await Post.find(
+    let posts = await Post.find(
                     {
                       $text: {
                         $search: searchTerm
@@ -28,6 +28,7 @@ exports.searchResultGetController = async (req, res, next) => {
       res.render('../views/pages/explorer/search', {
         title: `Search result - ${searchTerm}`,
         flashMessage: Flash.getMessage(req),
+        posts,
         searchTerm,
         itemPerPage,
         currentPage,
