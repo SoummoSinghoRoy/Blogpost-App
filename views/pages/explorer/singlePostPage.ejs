@@ -10,7 +10,7 @@
             <small class="text-secondary">
               <%= moment(post.createdAt) %>, 
               <%= post.readTime %>,
-              posted by - <%= post.author.username %>  
+              posted by - <a href="/author/<%= post.author._id %> "><%= post.author.username %></a>  
             </small>
             <% if (user) { %>
               <span class="ms-auto bookmarks" data-post="<%= post._id %>">
