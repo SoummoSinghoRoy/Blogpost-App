@@ -16,7 +16,7 @@
             <div class="row">
               <% if (posts.length === 0) { %>
                 <div class="card-body">
-                  <h4 class="card-title text-center text-muted">posts not found</h4>
+                  <h4 class="card-title text-center text-muted">Posts not found</h4>
                   <a href="/posts/create" class="card-link">create a post now</a>
                 </div>
               <% }else { %>
@@ -26,7 +26,7 @@
                       <img src="<%= post.thumbnail %> " class="card-img-top" alt="post thumbnail">
                     <% } %>
                     <div class="card-body">
-                      <a href="/posts/edit/<%= post._id %> " class="text-dark h5"><%= post.title %> </a>
+                      <a href="/posts/edit/<%= post._id %> " class="text-dark h6 pt-2"><%= post.title %> </a>
                     </div>
                   </div>
                 <% } %>

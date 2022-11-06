@@ -4,7 +4,7 @@ const moment = require('moment');
 module.exports = () => {
   return (req, res, next) => {
     res.locals.user = req.user
-    res.locals.isloggedIn = req.session.isloggedIn;
+    res.locals.isloggedIn = req.session.isloggedIn
     res.locals.truncate = (html) => {
       let node = cheerio.load(html)
       let text = node.text()

@@ -8,12 +8,12 @@ const  {
   createProfilePostController,
   editProfileGetController,
   editProfilePostController,
-
+  bookmarksPostGetController
  }  = require('../controllers/dashboardController');
 const { isAuthenticated } = require('../middleware/authMiddleware');
 const profileValidator = require('../validator/dashboard/profileValidator');
 
-router.get('/', isAuthenticated, dashboardGetController);
+router.get('/bookmarks', isAuthenticated, bookmarksPostGetController)
 
 router.get('/create-profile', isAuthenticated, createProfileGetController);
 router.post('/create-profile', 
@@ -24,5 +24,9 @@ router.post('/create-profile',
 router.get('/edit-profile', isAuthenticated, editProfileGetController);
 router.post('/edit-profile', isAuthenticated, profileValidator, editProfilePostController);
 
+router.get('/', isAuthenticated, dashboardGetController);
 
 module.exports = router;
+
+
+// 23.2 Bookmarks Dashboard Page -- etar route er kaj kora hoyeche ekhane r controller er kaj kora hoyeche dashBoardController e. 

@@ -1,7 +1,8 @@
-// bookmark 
+
 window.onload = function () {
   const bookmarks = document.getElementsByClassName('bookmarks');
 
+  // bookmark 
   [...bookmarks].forEach(bookmark => {
     bookmark.style.cursor = 'pointer'
     bookmark.addEventListener('click', function(e) {
@@ -35,13 +36,11 @@ window.onload = function () {
             })
     })
   })
-}
 
-// like dislike
-window.onload = function () {
+  // like dislike
   const likeBtn = document.getElementById('likeBtn');
   const disLikeBtn = document.getElementById('disLikeBtn');
-  
+
   likeBtn.addEventListener('click', function(){
     let postId = likeBtn.dataset.post
 
@@ -79,27 +78,25 @@ window.onload = function () {
                     alert(err.message)
                   })
   })
-}
 
-function reqLikeDislike(reactType, postId) {
-  let headers = new Headers()
-  headers.append('Accept', 'Application/JSON')
-  headers.append('Content-Type', 'Application/JSON')
+  function reqLikeDislike(reactType, postId) {
+    let headers = new Headers()
+    headers.append('Accept', 'Application/JSON')
+    headers.append('Content-Type', 'Application/JSON')
+  
+    let req = new Request(`/api/${reactType}/${postId}`, {
+      method: 'GET',
+      headers,
+      mode: 'cors'
+    })
+  
+    return fetch(req)
+  }
 
-  let req = new Request(`/api/${reactType}/${postId}`, {
-    method: 'GET',
-    headers,
-    mode: 'cors'
-  })
-
-  return fetch(req)
-}
-
-// comment
-window.onload = function () {
   const comment = document.getElementById('comment');
   const commentHolder = document.getElementById('commentHolder');
 
+  // comment
   comment.addEventListener('keypress', function(event) {
     if(event.key === 'Enter') {
       if(event.target.value) {
@@ -155,49 +152,48 @@ window.onload = function () {
       }
     }
   })
-}
-
-function createComment(comment) {
-  let innerHTML = `
-    <img src="${comment.user.profilePics}" class="rounded-circle mx-3 my-3" style="width: 40px">
-    <div class="media-body my-3">
-      <p>${comment.body}</p>
-      <div class="my-3">
-        <input type="text" class="form-control" name="reply" placeholder="press enter to reply" data-comment=${comment._id}>
-      </div> 
+  
+  function createComment(comment) {
+    let innerHTML = `
+      <img src="${comment.user.profilePics}" class="rounded-circle mx-3 my-3" style="width: 40px">
+      <div class="media-body my-3">
+        <p>${comment.body}</p>
+        <div class="my-3">
+          <input type="text" class="form-control" name="reply" placeholder="press enter to reply" data-comment=${comment._id}>
+        </div> 
+      </div>
+    `
+    let div = document.createElement('div')
+    div.className = 'media border'
+    div.innerHTML = innerHTML
+    return div
+  }
+  
+  function generateReq (url, method, body) {
+    let headers = new Headers()
+    headers.append('Accept', 'Application/JSON')
+    headers.append('Content-Type', 'Application/JSON')
+  
+    let req = new Request(url, {
+      method,
+      headers,
+      body: JSON.stringify(body),
+      mode: 'cors'
+    })
+    return req
+  }
+  
+  function createReplyElement (reply) {
+    let innerHTML = `
+    <img src="${reply.profilePics}" class="align-self-start me-3 rounded-circle" style="width: 40px;">
+    <div class="media-body">
+      <p>${reply.body}</p>
     </div>
-  `
-  let div = document.createElement('div')
-  div.className = 'media border'
-  div.innerHTML = innerHTML
-
-  return div
+    `
+    let div = document.createElement('div')
+    div.className = 'media mt-3'
+    div.innerHTML = innerHTML
+    return div
+  }
 }
 
-function generateReq (url, method, body) {
-  let headers = new Headers()
-  headers.append('Accept', 'Application/JSON')
-  headers.append('Content-Type', 'Application/JSON')
-
-  let req = new Request(url, {
-    method,
-    headers,
-    body: JSON.stringify(body),
-    mode: 'cors'
-  })
-  return req
-}
-
-function createReplyElement (reply) {
-  let innerHTML = `
-  <img src="${reply.profilePics}" class="align-self-start me-3 rounded-circle" style="width: 40px;">
-  <div class="media-body">
-    <p>${reply.body}</p>
-  </div>
-  `
-  let div = document.createElement('div')
-  div.className = 'media mt-3'
-  div.innerHTML = innerHTML
-
-  return div
-}
