@@ -117,6 +117,45 @@ exports.logoutController = (req,res,next) => {
   })
 }
 
+exports.changePasswordGetController = async (req, res, next) => {
+  res.render('pages/auth/changepassword', {
+    title: 'Change password',
+    flashMessage: flash.getMessage(req)
+  })
+}
+
+exports.changePasswordPostController = async (req, res, next) => {
+  let {oldpassword, newpassword, confirmpassword} = req.body
+
+  if(newpassword !== confirmpassword) {
+    req.flash('fail','Password doesnot match')
+    return res.redirect('/auth/changepassword')
+  }
+
+  try {
+    
+    let match = await bcrypt.compare(oldpassword, req.user.password)
+    if(!match) {
+      req.flash('fail','Old password is wrong')
+      return res.redirect('/auth/changepassword')
+    }
+  
+    let hashedPassword = await bcrypt.hash(newpassword, 11)
+
+    await User.findOneAndUpdate(
+      {_id: req.user._id},
+      {$set: {password: hashedPassword}}
+    )
+    req.flash('success', 'Password Changes succesfully')
+    return res.redirect('/auth/changepassword')
+
+  } catch (error) {
+    next(error)
+  }
+
+}
+
+
 // views er modhye pages folder e auth namok ekta folder theke authentication onujaiyi je response render hobe. tar template toiry kora hoyeche.
 
 // 13.2 Setup App For EJS -- ekhane kichu middleware setup kora hoyeche, template engine configure kora hoyeche ebong publicly je page serve kora hobe tar configure kora hoyeche. wgulo sob kaj kora hoyeche index.js e
@@ -142,3 +181,5 @@ exports.logoutController = (req,res,next) => {
 // 15.7 Connect Mlab Databse with Compass
 // 15.8 Session Store -- session store korar jonyo connect-mpngodb-session module use korechi ja import korechi & configuration korechi index.js e.
 // 15.9 Bind User with Request Middleware -- etar jonyo middleware folder e authMiddleware.js namok file create kore tar modhye sob kaj korechi.
+
+// 23.4 Change Password Page -- routing controller kaj kora hoyeche changePasswordGetController & changePasswordPostController e.

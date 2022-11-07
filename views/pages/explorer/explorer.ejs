@@ -22,7 +22,7 @@
           <% for(let post of posts) {%>
             <div class="card card-body my-3">
               <% if (post.thumbnail) { %>
-               <img src="<%= post.thumbnail %>" class="img-fluid mb-2"/>
+               <img src="<%= post.thumbnail %>" class="img-fluid mb-2" style="height: 325px;">
               <% } %>
               <a href="/explorer/<%= post._id %>" class="text-secondary">
                 <h5><%= post.title %></h5>

@@ -3,6 +3,7 @@ const errorFormatter = require('../utils/validationErrorFormatter');
 const flash = require('../utils/Flash');
 const Profile = require('../models/Profile');
 const User = require('../models/User');
+const Comment = require('../models/Comment');
 
 exports.dashboardGetController = async (req, res, next) => {
   try {
@@ -203,6 +204,33 @@ exports.bookmarksPostGetController = async (req, res, next) => {
   }
 }
 
+exports.postCommentsGetController = async (req, res, next) => {
+  try {
+    let profile = await Profile.findOne({user: req.user._id})
+    let comments = await Comment.find({post: {$in: profile.posts}})
+                                .populate({
+                                  path: 'post',
+                                  select: 'title'
+                                })
+                                .populate({
+                                  path: 'user',
+                                  select: 'username profilePics'
+                                })
+                                .populate({
+                                  path: 'replies.user',
+                                  select: 'username profilePics'
+                                })
+
+    res.render('pages/dashboard/comments', {
+      title: 'Recent comments',
+      flashMessage: flash.getMessage(req),
+      comments
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 
 // 15.12 IsAuthenticated Middleware -- etar kaj kora hoyeche authMiddleware er modhye.
 
@@ -225,3 +253,4 @@ exports.bookmarksPostGetController = async (req, res, next) => {
 // 20.2 Create Post Template -- etar kaj korechi views --> pages --> dashboard --> post --> createPost.ejs e, route handle korechi routes --> postRoute.js e.
 
 // 23.2 Bookmarks Dashboard Page -- etar route er controller er kaj kora hoyeche bookmarksPostGetController e & template er kaj kora hoyeche views --> pages --> dashboard --> bookmarks.ejs e.
+// 23.3 Comment Dashboard Page -- etar kaj kora hoyeche postCommentsGetController e & route handle kora hoyeche dashboardRoute.js e.

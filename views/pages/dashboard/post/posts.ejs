@@ -1,6 +1,6 @@
 <%- include('../../../partials/header.ejs')  %>
 
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
       <div class="col-md-3">
         <%- include('../../../partials/sidebar.ejs')  %>
@@ -23,7 +23,7 @@
                 <% for( let post of posts.reverse() ) { %>
                   <div class="card col-3">
                     <% if (post.thumbnail) { %>
-                      <img src="<%= post.thumbnail %> " class="card-img-top" alt="post thumbnail">
+                      <img src="<%= post.thumbnail %> " class="card-img-top" alt="post thumbnail" height="145">
                     <% } %>
                     <div class="card-body">
                       <a href="/posts/edit/<%= post._id %> " class="text-dark h6 pt-2"><%= post.title %> </a>
