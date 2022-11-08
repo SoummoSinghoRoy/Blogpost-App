@@ -4,16 +4,32 @@ const flash = require('../utils/Flash');
 const Profile = require('../models/Profile');
 const User = require('../models/User');
 const Comment = require('../models/Comment');
+const Post = require('../models/Post');
 
 exports.dashboardGetController = async (req, res, next) => {
   try {
     let profile = await Profile.findOne({user: req.user._id})
+                               .populate({
+                                path: 'posts',
+                                select: 'title thumbnail'
+                               })
+                               .populate({
+                                path: 'bookmarks',
+                                select: 'title thumbnail'
+                               })
 
+    let posts = await Post.find({author: req.user._id})
+    
     if(profile) {
       return res.render('../views/pages/dashboard/dashboard.ejs', 
       {
         title: `My Dashboard`,
-        flashMessage: flash.getMessage(req)
+        flashMessage: flash.getMessage(req),
+        posts: profile.posts.slice(0,6),
+        bookmarks: profile.bookmarks.slice(0,3),
+        totalpostlength: profile.posts.length,
+        totalbookmarkslength: profile.bookmarks.length,
+        lastPost: posts[posts.length - 1]
       })
     }
     res.redirect('/uploads/profile-pics')
@@ -254,3 +270,5 @@ exports.postCommentsGetController = async (req, res, next) => {
 
 // 23.2 Bookmarks Dashboard Page -- etar route er controller er kaj kora hoyeche bookmarksPostGetController e & template er kaj kora hoyeche views --> pages --> dashboard --> bookmarks.ejs e.
 // 23.3 Comment Dashboard Page -- etar kaj kora hoyeche postCommentsGetController e & route handle kora hoyeche dashboardRoute.js e.
+// 23.5 Dashboard Final Page -- etar kaj kora hoyeche dashboardGetController e & route purbey handle kore hoyeche, dashboard.ejs e kichu kaj kora hoyeche.
+// 23.6 Navigation and Finishing Touch -- etar kaj kora hoyeche patials --> navigation.ejs e.

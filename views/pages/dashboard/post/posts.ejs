@@ -7,32 +7,26 @@
       </div>
 
       <div class="col-md-9">
-        <div class="card">
-          <div class="card-body d-flex">
-            <h4 class="card-title"><%= title %></h4>
-            <a href="/posts/create" class="card-link ms-auto">create a post now</a>
-          </div>
-          <div class="card-body">
-            <div class="row">
-              <% if (posts.length === 0) { %>
-                <div class="card-body">
-                  <h4 class="card-title text-center text-muted">Posts not found</h4>
-                  <a href="/posts/create" class="card-link">create a post now</a>
-                </div>
-              <% }else { %>
+        <h3 class="text-center text-warning py-3">All Posts</h3>
+          <div class="posts">
+            <% if (posts.length === 0) { %>
+              <div class="card card-body">
+                <h4 class="card-title text-muted text-center">Posts not found</h4>
+              </div>
+            <% }else{ %>
+              <div class="row">
                 <% for( let post of posts.reverse() ) { %>
-                  <div class="card col-3">
+                <div class="col-4">
+                  <div class="card card-body">
                     <% if (post.thumbnail) { %>
                       <img src="<%= post.thumbnail %> " class="card-img-top" alt="post thumbnail" height="145">
                     <% } %>
-                    <div class="card-body">
-                      <a href="/posts/edit/<%= post._id %> " class="text-dark h6 pt-2"><%= post.title %> </a>
-                    </div>
+                    <a href="/explorer/<%= post._id %>" class="text-dark h6 pt-2"><%= post.title %> </a>
                   </div>
-                <% } %>
+                </div>
               <% } %>
-            </div>
-          </div>
+              </div>
+            <% } %> 
         </div>
       </div>
     </div>

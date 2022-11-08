@@ -48,7 +48,7 @@ const routes = [
   {
     path: '/',
     handler: (req,res) => {
-      res.send(`<h2>Blogpost-App</h2>`)
+      res.redirect('/explorer')
     }
   }
 ]

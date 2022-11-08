@@ -183,3 +183,4 @@ exports.changePasswordPostController = async (req, res, next) => {
 // 15.9 Bind User with Request Middleware -- etar jonyo middleware folder e authMiddleware.js namok file create kore tar modhye sob kaj korechi.
 
 // 23.4 Change Password Page -- routing controller kaj kora hoyeche changePasswordGetController & changePasswordPostController e.
+// 23.5 Dashboard Final Page -- etar kaj kora hoyeche dashboardController.js e.
