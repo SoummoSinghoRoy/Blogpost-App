@@ -272,3 +272,5 @@ exports.postCommentsGetController = async (req, res, next) => {
 // 23.3 Comment Dashboard Page -- etar kaj kora hoyeche postCommentsGetController e & route handle kora hoyeche dashboardRoute.js e.
 // 23.5 Dashboard Final Page -- etar kaj kora hoyeche dashboardGetController e & route purbey handle kore hoyeche, dashboard.ejs e kichu kaj kora hoyeche.
 // 23.6 Navigation and Finishing Touch -- etar kaj kora hoyeche patials --> navigation.ejs e.
+
+// 

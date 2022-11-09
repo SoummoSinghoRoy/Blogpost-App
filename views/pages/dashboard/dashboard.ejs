@@ -39,16 +39,17 @@
           </div>
           
           <div class="col-6">
-            <div class="card mb-3 total-bookmarks" style="height: 90px;">
+            <div class="card mb-3 total-bookmarks" style="height: 103px;">
               <% if (totalbookmarkslength === 0) { %>
                 <div class="row g-0">
-                  <div class="col-md-8">
+                  <div class="col-md-9">
                     <div class="card-body">
                       <h2 class="card-title">Total Bookmarks</h2>
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <p class="card-text"><%= totalbookmarkslength %> </p>
+                  <div class="col-md-3">
+                    <p class="card-text text-warning display-3" style="text-align: center;"><%= totalbookmarkslength %> </p>
+                    <p></p>
                   </div>
                 </div>
               <% }else{ %>

@@ -34,7 +34,7 @@ app.use((error, req, res, next) => {
 
 const PORT = process.env.PORT || 5000
 
-mongoose.connect(config.get('db-uri'), {
+mongoose.connect(`mongodb+srv://${config.get('db-admin')}:${config.get('db-password')}@blogpost-app.l1ecnyb.mongodb.net/blogpost-app`, {
   useNewUrlParser: true
 })
         .then(()=> {
