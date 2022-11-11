@@ -275,4 +275,5 @@ exports.postCommentsGetController = async (req, res, next) => {
 
 // 24.1 How to Deploy NodeJS App -- ei lecture e ami extra kichu kaj korechi(mongodb atlas server connect, .env modify), node.js server deployment er jonyo flexible kichu server platform somporke jenechi.
 // 24.2 Initialize Git and Github -- ei lecture e git e project e deploy er kaj kora hoyeche kintu ami already git e project rekhe kaj korechi + package.json & index.js e kichu kaj kora hoyeche.
-//24.3 Deploy to Heroku -- server deployment er jonyo ei application tar ekta copy korechi, bivinno comment, directions, modification kore git a add kore trpr server e uthano hobe. heroku te app name bloggingpost-app, erpor deploy process follow kore deploy kortechi
+//24.3 Deploy to Heroku -- server deployment er jonyo ei application tar ekta copy korechi, bivinno comment, directions, modification kore git a add kore trpr server e uthano hobe. heroku te app name bloggingpost-app, erpor Procfile create korechi then deploy process follow kore deploy kortechi
+// 24.4 Conclusion
